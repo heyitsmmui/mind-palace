@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ongoing Mental Models — Mind Palace</title>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#171a21; --panel2:#1d212b; --line:#2a2f3a;
+    --ink:#e8eaef; --muted:#9aa3b2; --faint:#6b7280;
+    --accent:#7aa2ff; --accent2:#5cd6b3; --warn:#f0b354; --update:#8b7dff;
+    --tag-bg:#232838; --tag-ink:#b9c2d6;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    padding:0 16px 64px;}
+  .wrap{max-width:820px; margin:0 auto}
+  header.top{padding:36px 0 8px; border-bottom:1px solid var(--line)}
+  h1{font-size:26px; margin:0 0 6px; letter-spacing:-.02em}
+  .sub{color:var(--muted); font-size:15px; margin:0}
+  .meta-note{color:var(--faint); font-size:13px; margin-top:14px}
+  .back{margin-top:10px}
+  .back a{color:var(--accent);text-decoration:none;font-weight:600;border-bottom:1px solid var(--line)}
+
+  .toc{background:var(--panel2);border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px;margin-top:24px}
+  .toc h2{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin:0 0 8px}
+  .toc ol{margin:0;padding-left:20px;color:var(--muted);font-size:14.5px}
+  .toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent}
+  .toc a:hover{border-color:var(--accent)}
+
+  .model{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:20px 20px 16px;margin-top:20px}
+  .model h2{font-size:20px;margin:0 0 4px;letter-spacing:-.01em}
+  .model .oneline{color:var(--accent2);font-size:14px;margin:0 0 12px;font-weight:600}
+  .model h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
+    margin:16px 0 6px;font-weight:700}
+  .model p{margin:0 0 10px;font-size:15px;color:var(--ink)}
+  .model p.dim{color:var(--muted);font-size:14.5px}
+  .model ul.tension{margin:0;padding-left:18px}
+  .model ul.tension li{font-size:14.5px;color:var(--muted);margin:4px 0}
+  .model ul.tension b{color:var(--ink)}
+
+  details{margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
+  summary{cursor:pointer;font-size:13px;color:var(--accent);font-weight:600;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸ ";color:var(--faint)}
+  details[open] summary::before{content:"▾ "}
+  .srcs{margin:10px 0 2px;padding-left:2px;list-style:none}
+  .srcs li{font-size:13.5px;margin:5px 0;color:var(--muted);padding-left:14px;text-indent:-14px}
+  .srcs li::before{content:"·";color:var(--faint);margin-right:8px}
+  .srcs a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+  .srcs a:hover{border-color:var(--accent)}
+  .srcs .who{color:var(--faint)}
+  .xlink{color:var(--accent2)}
+
+  footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);color:var(--faint);font-size:13px}
+
+  @media (prefers-color-scheme: light){
+    :root{--bg:#f6f7f9;--panel:#ffffff;--panel2:#f0f2f6;--line:#e2e5ea;
+      --ink:#1a1d24;--muted:#525a68;--faint:#8a93a3;--tag-bg:#eef1f6;--tag-ink:#455065;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <h1>Ongoing Mental Models</h1>
+    <p class="sub">The durable, slow-changing companion to the Reading Thread. Where the thread tracks <em>what's new</em>, this page holds the <em>settled models</em> — the frameworks that don't need re-updating every week — synthesized from the readings you've been saving.</p>
+    <p class="meta-note">v1.0 · built Aug 11, 2026 · synthesized from ~200 articles you emailed yourself (Apr–Aug 2026). Each model is a standing framework; the collapsible lists under each are the saved readings that feed it.</p>
+    <p class="back"><a href="index.html">← Back to the Reading Thread</a></p>
+  </header>
+
+  <div class="toc">
+    <h2>The models</h2>
+    <ol>
+      <li><a href="#world-models">World models &amp; the JEPA-vs-generative debate</a></li>
+      <li><a href="#vla">VLA &amp; robot foundation models (embodied / physical AI)</a></li>
+      <li><a href="#rl">RL for LLMs &amp; the RL-environment bottleneck</a></li>
+      <li><a href="#distill">Distillation: offline → on-policy → multi-teacher</a></li>
+      <li><a href="#serving">LLM inference &amp; serving systems</a></li>
+      <li><a href="#hardware">AI hardware, the memory wall &amp; co-design</a></li>
+      <li><a href="#av">The autonomous-driving stack (end-to-end vs modular)</a></li>
+      <li><a href="#frontier">Frontier watching: architecture, scaling &amp; economics</a></li>
+    </ol>
+  </div>
+
+  <!-- 1 -->
+  <div class="model" id="world-models">
+    <h2>1 · World models &amp; the JEPA-vs-generative debate</h2>
+    <p class="oneline">A world model is a learned, predictive simulator of environment dynamics — the question is what it should predict <em>in</em>.</p>
+    <h3>The model</h3>
+    <p>A "world model" learns to predict how the world evolves — given state and action, what comes next — so an agent can plan by rolling the model forward instead of acting blindly. The central fault line is the <b>representation the prediction happens in</b>. Generative/pixel approaches (video-prediction, diffusion world models like NVIDIA Cosmos) predict future <em>observations</em> and look impressive, but spend capacity modeling perceptual detail that may not matter for control. Joint-embedding predictive approaches (LeCun's JEPA / LeJEPA / AdaJEPA line) predict in a <b>learned latent space</b>, discarding un-predictable pixel detail and keeping what's decision-relevant — the argument being that a good world model should <em>be useful</em>, not just <em>look real</em>.</p>
+    <p class="dim">The practical upshot: "world model" is an overloaded term (video generator vs. latent dynamics model vs. simulator), and the field keeps re-litigating the taxonomy (see the "stop mixing AI / Physical AI / World Models / VLA" pieces). For your work, the useful cut is: is the model in the loop for <em>control</em> (needs to be fast, latent, action-conditioned) or for <em>data generation / sim</em> (can be slow, generative, high-fidelity)?</p>
+    <h3>Tensions / open questions</h3>
+    <ul class="tension">
+      <li><b>Look-real vs. be-useful:</b> does pixel fidelity help or distract from control?</li>
+      <li><b>When does a self-supervised objective actually yield a world model</b> (the LeJEPA question) vs. just a good encoder?</li>
+      <li>Where world models meet <b>action</b> — the merge into World-Action Models (see §2).</li>
+    </ul>
+    <details>
+      <summary>Sources from your inbox (15)</summary>
+      <ul class="srcs">
+        <li><a href="https://www.linkedin.com/posts/yann-lecun_adajepa-world-models-yield-better-performance-share-7479908672983166976-kARR">AdaJEPA — world models yield better performance</a> <span class="who">· LeCun</span></li>
+        <li><a href="https://www.linkedin.com/posts/yann-lecun_there-is-world-model-and-then-there-is-share-7468761054244749313-tYdN">"There is world model, and then there is…"</a> <span class="who">· LeCun</span></li>
+        <li><a href="https://www.linkedin.com/posts/yann-lecun_very-nice-video-from-jia-bin-huang-about-share-7473055968134733826-jpTf">Jia-Bin Huang video on world models</a> <span class="who">· LeCun</span></li>
+        <li><a href="https://www.linkedin.com/posts/hoang-van-hao_when-does-lejepa-learn-a-world-model-ugcPost-7468296839255986176-Am-6">When does LeJEPA learn a world model?</a> <span class="who">· Hoang Van Hao</span></li>
+        <li><a href="https://www.linkedin.com/posts/kenneth-church-a902772_ive-listened-to-many-of-yanns-talks-but-share-7461813834849345536-EgMy">On Yann's talks</a> <span class="who">· Kenneth Church</span></li>
+        <li><a href="https://www.linkedin.com/posts/zhiwen-aaron-f-53832924a_world-models-should-not-just-look-real-they-ugcPost-7478155686250504211-xNaL">World models shouldn't just look real</a> <span class="who">· Zhiwen Aaron F.</span></li>
+        <li><a href="https://www.linkedin.com/posts/meltdem_the-world-as-model-share-7477395212626014208-Hf4S">The world as model</a> <span class="who">· meltdem</span></li>
+        <li><a href="https://www.linkedin.com/posts/alexgkendall_everyones-talking-about-world-models-today-ugcPost-7490109880519794688-SLuV">Everyone's talking about world models</a> <span class="who">· Alex Kendall</span></li>
+        <li><a href="https://www.linkedin.com/posts/hadi-alzayer-75386011b_there-is-a-lot-of-excitement-about-world-share-7486497362912346112-voeC">Excitement about world models</a> <span class="who">· Hadi Alzayer</span></li>
+        <li><a href="https://www.linkedin.com/posts/leosu2013_want-a-clear-map-of-robot-world-models-share-7458204723423387648-OYhU">A clear map of robot world models</a> <span class="who">· Leo Su</span></li>
+        <li><a href="https://www.linkedin.com/posts/esmaeil-seraj-70590b80_robotics-ai-worldmodels-share-7458690126710300672-Vmn7">Robotics · world models</a> <span class="who">· Esmaeil Seraj</span></li>
+        <li><a href="https://www.linkedin.com/posts/junfan-zhu_reading-club04-world-models-in-roboticssiming-ugcPost-7451532774190039040-2exu">Reading club: world models in robotics</a> <span class="who">· Junfan Zhu</span></li>
+        <li><a href="https://huggingface.co/blog/barakor/pai">AI, Physical AI, World Models, VLA, VLM — terms we should stop mixing</a> <span class="who">· HF blog</span></li>
+        <li><a href="https://www.linkedin.com/posts/charxia_worldmodel-physicalai-ugcPost-7470755743508365312-h2Xl">World model · physical AI</a> <span class="who">· charxia</span></li>
+        <li><a href="https://www.linkedin.com/posts/nathaniel-wang-instructor_ive-been-researching-world-models-and-share-7466756822025039872-DB5C">Researching world models</a> <span class="who">· Nathaniel Wang</span></li>
+      </ul>
+    </details>
+  </div>
+
+  <!-- 2 -->
+  <div class="model" id="vla">
+    <h2>2 · VLA &amp; robot foundation models (embodied / physical AI)</h2>
+    <p class="oneline">Vision-Language-Action policies are converging with world models into World-Action Models — and the bottleneck is data + deployment, not architecture.</p>
+    <h3>The model</h3>
+    <p>A VLA (vision-language-action) model maps pixels + a language instruction directly to robot actions — the robotics analog of a foundation model. The frontier is the merge with world models: <b>World-Action Models (WAMs)</b> that both predict environment dynamics and output actions, so the policy can imagine consequences before acting ("pretrained to imagine, fine-tuned to act"). Diffusion policies remain a key building block for multi-modal action distributions. The recurring, sober message across these readings is that <b>architecture is no longer the limiter</b> — the binding constraints are real-world data (teleop, sim, tactile), evaluation, and the "deployment gap" between a demo and a fleet.</p>
+    <p class="dim">Definitional hygiene matters here too: VLA vs. VLM vs. world model vs. "physical AI" are distinct, and much confusion comes from collapsing them. The durable frame: perception → (optional world-model prediction) → policy → action, trained on a mix of internet-scale pretraining and embodiment-specific data.</p>
+    <h3>Tensions / open questions</h3>
+    <ul class="tension">
+      <li><b>Data is the moat:</b> where does robot data at scale come from — teleop, sim, video, tactile?</li>
+      <li><b>Open vs. closed</b> robot foundation models ("open at… what layer?").</li>
+      <li><b>The deployment gap:</b> impressive policies vs. reliable fielded systems.</li>
+    </ul>
+    <details>
+      <summary>Sources from your inbox (17)</summary>
+      <ul class="srcs">
+        <li><a href="https://www.linkedin.com/posts/xiao-ming-wu-ab9088233_awesome-vla-wam-beyond-rethinking-embodied-share-7489080508895678464-2BwB">Awesome VLA-WAM — rethinking embodied</a> <span class="who">· Xiao-Ming Wu</span></li>
+        <li><a href="https://www.linkedin.com/posts/moritzreuss_world-action-models-wams-have-become-the-share-7472295554341904384-I3oJ">World-Action Models (WAMs)</a> <span class="who">· Moritz Reuss</span></li>
+        <li><a href="https://www.linkedin.com/posts/pwalsh4_i-was-rereading-robots-need-more-than-vlas-share-7491178398527082496--Vvz">Robots need more than VLAs</a> <span class="who">· P. Walsh</span></li>
+        <li><a href="https://www.linkedin.com/posts/chris-paxton-41aba958_diffusion-policy-was-one-of-the-big-breakthroughs-share-7490779363467091968-sDUk">Diffusion policy as a breakthrough</a> <span class="who">· Chris Paxton</span></li>
+        <li><a href="https://www.linkedin.com/posts/mrukant_%F0%9D%97%A9%F0%9D%97%9F%F0%9D%97%94-vision-language-action-and-%F0%9D%97%A9-share-7466190617748926464-Tqwk">VLA (vision-language-action) primer</a> <span class="who">· mrukant</span></li>
+        <li><a href="https://www.linkedin.com/posts/rhonda-coleman-albazie_foundation-models-in-robotics-a-comprehensive-share-7465548582830546944-HUv_">Foundation Models in Robotics — survey</a> <span class="who">· R. Coleman</span></li>
+        <li><a href="https://www.linkedin.com/posts/eran-rosenberg_pretrained-to-imagine-fine-tuned-to-act-share-7487445161988362241-HWDx">Pretrained to imagine, fine-tuned to act</a> <span class="who">· Eran Rosenberg</span></li>
+        <li><a href="https://www.linkedin.com/posts/victor-hu-a2a61547_robotics-embodiedai-vla-share-7488165465811263489-s0oy">Robotics · embodied AI · VLA</a> <span class="who">· Victor Hu</span></li>
+        <li><a href="https://www.linkedin.com/posts/dakota-kim_robotics-embodiedai-physicalai-share-7487962285697593346-fWdA">Robotics · embodied · physical AI</a> <span class="who">· Dakota Kim</span></li>
+        <li><a href="https://www.linkedin.com/posts/harshipr_embodiedai-physicalai-worldmodels-share-7489858052951597056-k5tv">Embodied AI · physical AI · world models</a> <span class="who">· harshipr</span></li>
+        <li><a href="https://www.linkedin.com/posts/leosu2013_open-robot-foundation-models-but-open-at-share-7457838656746274816-7eb_">Open robot foundation models — "open at what?"</a> <span class="who">· Leo Su</span></li>
+        <li><a href="https://www.linkedin.com/posts/joe-dong_%CF%8007-prompt-engineering-comes-to-robot-foundation-share-7452870111645945856-6vam">Prompt engineering for robot foundation models</a> <span class="who">· Joe Dong</span></li>
+        <li><a href="https://www.linkedin.com/posts/karolhausman_a-steerable-model-with-emergent-capabilities-share-7450619055402565632-qKtU">Steerable model w/ emergent capabilities</a> <span class="who">· Karol Hausman</span></li>
+        <li><a href="https://www.a16z.news/p/the-physical-ai-deployment-gap">The physical AI deployment gap</a> <span class="who">· a16z / Oliver Hsu</span></li>
+        <li><a href="https://www.linkedin.com/posts/spencermhuang_physical-ai-is-moving-fast-and-open-models-share-7466667318597689345-SGu1">Physical AI moving fast · open models</a> <span class="who">· Spencer Huang</span></li>
+        <li><a href="https://www.linkedin.com/posts/enriquedelsol_robotics-physicalai-tactilesensing-share-7490419664200744960-dVpR">Robotics · tactile sensing</a> <span class="who">· Enrique del Sol</span></li>
+        <li><a href="https://www.linkedin.com/posts/xuningyang_one-of-the-biggest-challenge-in-robotics-share-7481886791776522240-m9-H">The biggest challenge in robotics</a> <span class="who">· Xuning Yang</span></li>
+      </ul>
+    </details>
+  </div>
+
+  <!-- 3 -->
+  <div class="model" id="rl">
+    <h2>3 · RL for LLMs &amp; the RL-environment bottleneck</h2>
+    <p class="oneline">Post-training RL is now a first-class stage; in 2026 the scarce resource is environments, not algorithms.</p>
+    <h3>The model</h3>
+    <p>RL turns a pretrained/SFT'd model into one optimized for outcomes — from RLHF (human preferences) to RLVR (verifiable rewards) to rubric-based rewards. The algorithmic core (policy gradients → PPO → GRPO and friends) is well-understood; the durable insight from this cluster is that the <b>frontier has moved from the algorithm to the environment</b>: rich, verifiable, non-gameable tasks are what's scarce, and building/scaling RL environments is the real work. The systems side is equally load-bearing — async/real-time RL, weight-syncing between trainer and inference engine, and avoiding <b>training-serving skew</b> (the sampler and the trainer must agree). "What does RL add on top of SFT" and "exploration as a third pretraining axis" frame the conceptual boundary of what RL is actually for.</p>
+    <p class="dim">Directly adjacent to your async-RL work: the ties between RL infra (SkyRL/Ray, vLLM-for-RL, native RL APIs) and the mid-training finding (from the thread) that CPT quality sets the ceiling on downstream RL.</p>
+    <h3>Tensions / open questions</h3>
+    <ul class="tension">
+      <li><b>Environments &gt; algorithms:</b> is progress now gated by task/reward design?</li>
+      <li><b>On-policy vs. off-policy</b> and how much training-serving skew you can tolerate.</li>
+      <li><b>What RL genuinely adds over SFT</b> — exploration, or just sharpening?</li>
+    </ul>
+    <details>
+      <summary>Sources from your inbox (18)</summary>
+      <ul class="srcs">
+        <li><a href="https://www.linkedin.com/posts/sreedath-panat_every-reinforcement-learning-algorithm-from-share-7468518835592040448-Ypkv">Every RL algorithm from scratch</a> <span class="who">· Sreedath Panat</span></li>
+        <li><a href="https://www.linkedin.com/posts/sreedath-panat_one-of-the-most-important-ideas-in-ppo-is-share-7463729673504448512-FQsu">The key idea in PPO</a> <span class="who">· Sreedath Panat</span></li>
+        <li><a href="https://www.linkedin.com/posts/avi-chawla_the-most-comprehensive-rl-overview-ive-ever-share-7456679587125559296-GCND">Comprehensive RL overview</a> <span class="who">· Avi Chawla</span></li>
+        <li><a href="https://huggingface.co/spaces/AdithyaSK/rl-environments-guide">Ultimate guide to RL environments</a> <span class="who">· HF Space / AdithyaSK</span></li>
+        <li><a href="https://www.linkedin.com/posts/adithya-s-kolavi_excited-to-release-the-ultimate-guide-to-ugcPost-7457425779312840704-s9hr">RL environments guide (announcement)</a> <span class="who">· Adithya Kolavi</span></li>
+        <li><a href="https://www.linkedin.com/posts/maxime-labonne_what-does-rl-actually-add-on-top-of-sft-share-7482382699752570880-ZRQx">What does RL add on top of SFT?</a> <span class="who">· Maxime Labonne</span></li>
+        <li><a href="https://www.linkedin.com/posts/maxime-labonne_exploration-as-a-third-pre-training-axis-share-7489990351978582017-oPVV">Exploration as a third pretraining axis</a> <span class="who">· Maxime Labonne</span></li>
+        <li><a href="https://www.linkedin.com/posts/ludovico-bessi_the-huggingface-trl-team-just-shipped-a-survey-share-7482063875450937344-iWyg">HF TRL team survey</a> <span class="who">· Ludovico Bessi</span></li>
+        <li><a href="https://www.linkedin.com/posts/ludovico-bessi_in-2026-the-frontier-of-rl-training-is-not-share-7483787834055700480-2kQh">The 2026 frontier of RL training</a> <span class="who">· Ludovico Bessi</span></li>
+        <li><a href="https://www.linkedin.com/posts/cwolferesearch_interested-in-learning-how-to-run-rl-at-scale-share-7467593628400447488-egF0">How to run RL at scale</a> <span class="who">· Cameron Wolfe</span></li>
+        <li><a href="https://www.linkedin.com/posts/sumanthrhegde_check-out-our-work-on-native-rl-apis-for-share-7465887620947152896-KaC8">Native RL APIs</a> <span class="who">· Sumanth Hegde</span></li>
+        <li><a href="https://www.linkedin.com/posts/aaron-hao_excited-to-share-some-of-our-work-on-improving-activity-7465885265727836160-VbV-">Improving vLLM for RL (weight sync)</a> <span class="who">· Aaron Hao</span></li>
+        <li><a href="https://www.anyscale.com/blog/vision-language-model-reinforcement-learning-skyrl">Vision-Language RL in SkyRL</a> <span class="who">· Anyscale</span></li>
+        <li><a href="https://www.linkedin.com/posts/julian-forero_ray-skyrl-ray-ugcPost-7468347685578645505-cQfD">Ray + SkyRL</a> <span class="who">· Julian Forero</span></li>
+        <li><a href="https://www.linkedin.com/posts/linbo-liu-5b06a3203_reinforcementlearning-llm-realtimerl-share-7490880070597730304-UDUR">Real-time RL for LLMs</a> <span class="who">· Linbo Liu</span></li>
+        <li><a href="https://www.linkedin.com/posts/christine-x-hu_dr-tulu-reinforcement-learning-with-evolving-share-7479957591565979651-woxe">Dr. Tulu — RL with evolving rubrics</a> <span class="who">· Christine Hu</span></li>
+        <li><a href="https://www.linkedin.com/posts/riawe_pictura-perspective-view-self-play-at-scale-share-7490860325886595072-3EIS">Pictura — self-play at scale</a> <span class="who">· riawe</span></li>
+        <li><a href="https://www.linkedin.com/posts/justin-carpentier-7727993a4_very-new-direction-in-reinforcement-learning-share-7470095059644981249--FyR">A new direction in RL</a> <span class="who">· Justin Carpentier</span></li>
+      </ul>
+    </details>
+  </div>
+
+  <!-- 4 -->
+  <div class="model" id="distill">
+    <h2>4 · Distillation: offline → on-policy → multi-teacher</h2>
+    <p class="oneline">Distillation is a spectrum by <em>who generates the data and how it's graded</em> — on-policy variants are what's moving.</p>
+    <h3>The model</h3>
+    <p>Distillation compresses a big teacher into a small student. The durable taxonomy is by data source and grading: <b>offline</b> (train the student against cached teacher outputs/logits — cheap, but off-policy), <b>on-policy distillation (OPD)</b> (the student generates, the teacher grades those generations — closes the train/inference distribution gap, popularized by DeepSeek V4), and <b>multi-teacher</b> (blend several teachers). A recurring, counterintuitive result: a <b>weaker teacher can sometimes help</b> (less distribution mismatch with the student). This connects directly to the thread's entries — the offline top-K-logit efficiency paper (Multiverse) and Muse Glimmer being distilled from Muse Spark.</p>
+    <p class="dim">The load-bearing distinction for your pipelines: offline caching assumes a fixed corpus (can't serve student-generated on-policy distillation), whereas OPD needs teacher logits on fresh student rollouts — a scheduling/infra difference, not just a loss-function one.</p>
+    <h3>Tensions / open questions</h3>
+    <ul class="tension">
+      <li><b>On-policy vs. offline:</b> distribution match vs. compute cost.</li>
+      <li><b>Weaker-teacher paradox:</b> when is a smaller gap better than a smarter teacher?</li>
+      <li>Interaction with <b>quantization / QLoRA</b> for the final compressed artifact.</li>
+    </ul>
+    <details>
+      <summary>Sources from your inbox (5)</summary>
+      <ul class="srcs">
+        <li><a href="https://www.linkedin.com/posts/tao-luo-95b54a36a_deepseek-v4s-on-policy-distillation-opd-share-7453628676744622080-lX8I">DeepSeek V4 on-policy distillation (OPD)</a> <span class="who">· Tao Luo</span></li>
+        <li><a href="https://www.linkedin.com/posts/maxime-labonne_multi-teacher-on-policy-distillation-share-7478013802811162624-wgRI">Multi-teacher on-policy distillation</a> <span class="who">· Maxime Labonne</span></li>
+        <li><a href="https://www.linkedin.com/posts/ashishbamania_breaking-can-you-use-a-weaker-teacher-share-7491105172220207104-fLLF">Can you use a weaker teacher?</a> <span class="who">· Ashish Bamania</span></li>
+        <li><a href="https://www.linkedin.com/posts/tantara_what-deepseek-isnt-doing-share-7491214214473306112-kt0h">What DeepSeek isn't doing</a> <span class="who">· tantara</span></li>
+        <li><a href="https://www.linkedin.com/posts/hoang-van-hao_i-just-trimmed-25-off-my-qwen3-14b-qlora-share-7466109576602480643-TWMN">Trimmed 25% off Qwen3-14B (QLoRA)</a> <span class="who">· Hoang Van Hao</span></li>
+      </ul>
+    </details>
+  </div>
+
+  <!-- 5 -->
+  <div class="model" id="serving">
+    <h2>5 · LLM inference &amp; serving systems</h2>
+    <p class="oneline">Serving is a memory-management problem: prefill vs. decode, the KV cache, and keeping the GPU busy.</p>
+    <h3>The model</h3>
+    <p>An LLM request has two phases with opposite profiles: <b>prefill</b> (compute-bound, parallel over the prompt) and <b>decode</b> (memory-bandwidth-bound, one token at a time). The dominant state is the <b>KV cache</b>, which grows with sequence length and dominates memory. The canonical techniques all manage this: <b>paged attention</b> (virtual-memory-style KV allocation, kills fragmentation), <b>continuous batching</b> (swap finished sequences out mid-flight to keep the GPU saturated), and <b>prefill/decode (PD) disaggregation</b> (run the two phases on different hardware so neither starves the other). At the very high end the framing flips to "on a B200 you don't run a matmul, you <b>malloc</b>" — i.e., memory movement, not FLOPs, is the game.</p>
+    <p class="dim">This is the inference-time twin of §6 (hardware) and the thread's "efficiency frontier" trend: throughput comes from KV-cache discipline, batching, and precision — not just bigger chips. Training-serving skew (§3) is the RL-side hazard of the same stack.</p>
+    <h3>Tensions / open questions</h3>
+    <ul class="tension">
+      <li><b>KV cache is the bottleneck:</b> compression, paging, and when it "no longer fits."</li>
+      <li><b>Disaggregation</b> — worth the complexity on a single node?</li>
+      <li><b>Benchmarks that reflect reality</b> (InferenceMAX-style) vs. peak-FLOP marketing.</li>
+    </ul>
+    <details>
+      <summary>Sources from your inbox (15)</summary>
+      <ul class="srcs">
+        <li><a href="https://medium.com/@shirleyzhai521/how-continuous-batching-improves-llm-serving-throughput-in-vllm-85ddb0237018">Continuous batching in vLLM</a> <span class="who">· Medium</span></li>
+        <li><a href="https://www.linkedin.com/posts/raj-abhijit-dandekar-67a33118a_before-paged-attention-llm-inference-wasted-share-7447945208689942528-yJIl">Before paged attention, inference wasted memory</a> <span class="who">· Raj Dandekar</span></li>
+        <li><a href="https://www.linkedin.com/posts/shantanuladhwe_10-things-you-should-know-about-vllm-in-share-7450154444727439360-Eq1b">10 things to know about vLLM</a> <span class="who">· Shantanu Ladhwe</span></li>
+        <li><a href="https://www.linkedin.com/posts/aanchalkaramchandani_inside-llm-inference-when-the-kv-cache-no-share-7450610608607211520-6wwm">When the KV cache no longer fits</a> <span class="who">· Aanchal K.</span></li>
+        <li><a href="https://www.linkedin.com/posts/pd-disaggregation-on-a-single-node-if-you-share-7451147617914273792-1jaj">PD disaggregation on a single node</a></li>
+        <li><a href="https://www.linkedin.com/posts/parthasarathy-ramaraj-rb20b1981_understanding-the-llm-inference-workload-share-7487789130773594112-_Qxa">Understanding the LLM inference workload</a> <span class="who">· Parthasarathy R.</span></li>
+        <li><a href="https://www.linkedin.com/posts/harshavardhanan2990_when-a-request-comes-into-an-llm-server-share-7491343909994983424-73PN">When a request comes into an LLM server</a> <span class="who">· Harshavardhanan</span></li>
+        <li><a href="https://www.linkedin.com/posts/chayennezhao_great-hands-on-profiling-writeup-using-sglangs-share-7491747497682358272-vwRU">SGLang profiling writeup</a> <span class="who">· Chayenne Zhao</span></li>
+        <li><a href="https://www.linkedin.com/posts/chayennezhao_training-serving-skew-is-one-of-the-sneakiest-ugcPost-7472749263110864896-16E-">Training-serving skew</a> <span class="who">· Chayenne Zhao</span></li>
+        <li><a href="https://www.linkedin.com/posts/riddhiman-sherlekar_most-production-oom-errors-happen-because-share-7468161505549578240-C4Ky">Production OOM errors</a> <span class="who">· Riddhiman S.</span></li>
+        <li><a href="https://www.linkedin.com/posts/dhillondeep_distributed-inference-is-going-through-an-share-7459066125234917377-Ox-H">Distributed inference inflection</a> <span class="who">· Deep Dhillon</span></li>
+        <li><a href="https://www.linkedin.com/posts/peabrane_previous-benchmarks-like-semianalysis-inferencex-share-7471620307427155968-Xdg4">InferenceMAX benchmarks</a> <span class="who">· peabrane</span></li>
+        <li><a href="https://www.linkedin.com/posts/emi-andere_on-a-b200-you-dont-run-a-matmul-you-malloc-share-7467766952321654784-HoG1">On a B200 you malloc, not matmul</a> <span class="who">· emi-andere</span></li>
+        <li><a href="https://www.linkedin.com/posts/emi-andere_deepseek-v4-runs-a-million-token-context-share-7466602205119352833--K0S">DeepSeek V4 — 1M-token context</a> <span class="who">· emi-andere</span></li>
+        <li><a href="https://www.linkedin.com/posts/byronhsu1230_scaling-kimi-k3-on-h200s-withsglang-while-share-7489912255380348928-jUn8">Scaling Kimi K3 on H200s with SGLang</a> <span class="who">· Byron Hsu</span></li>
+      </ul>
+    </details>
+  </div>
+
+  <!-- 6 -->
+  <div class="model" id="hardware">
+    <h2>6 · AI hardware, the memory wall &amp; co-design</h2>
+    <p class="oneline">The binding constraint is moving data, not multiplying it — so memory hierarchy, precision, and compilers decide performance.</p>
+    <h3>The model</h3>
+    <p>Modern accelerators are bottlenecked by the <b>memory wall</b>: moving bytes between HBM and compute costs far more (energy and time) than the arithmetic itself. So the durable levers are the memory hierarchy (<b>SRAM vs. HBM vs. emerging HBC</b>), <b>low precision</b> (FP8 → FP4, where attention has its own funny bottlenecks), <b>KV-cache compression</b>, and the <b>compiler/kernel</b> layer (XLA, TVM-lineage AI compilers) that decides whether hardware is actually utilized. This is why "hardware-software co-design" keeps getting called AI's real moat, and why the supply chain (ASML/EUV as a chokepoint) matters upstream. It's the same thesis Jeff Dean's talk names in the thread: ~1000× energy gap between data movement and a multiply.</p>
+    <p class="dim">Practically this fuses with §5 (serving) and the thread's efficiency-frontier trend: quantization + KV compression + good kernels beat raw FLOPs, and infra plumbing (distributed checkpointing, JAX/XLA performance) is part of the same story.</p>
+    <h3>Tensions / open questions</h3>
+    <ul class="tension">
+      <li><b>Precision floor:</b> how low can you go (FP4 and below) before quality breaks?</li>
+      <li><b>Memory tech:</b> does HBC or on-chip SRAM change the wall, or just move it?</li>
+      <li><b>Compilers</b> as the real unlock — who owns the stack (XLA vs. open)?</li>
+    </ul>
+    <details>
+      <summary>Sources from your inbox (12)</summary>
+      <ul class="srcs">
+        <li><a href="https://www.qualcomm.com/news/onq/2026/07/hbc-vs-hbm-vs-sram-ai-inference-memory">HBC vs. HBM vs. SRAM — scaling the memory wall</a> <span class="who">· Qualcomm</span></li>
+        <li><a href="https://stng.substack.com/p/the-essence-of-gpus">The Essence of GPUs</a> <span class="who">· Substack</span></li>
+        <li><a href="https://www.linkedin.com/posts/sonyaruihuang_why-hardware-software-co-design-is-ais-real-share-7479934003899301888-CfKn">Why HW-SW co-design is AI's real moat</a> <span class="who">· Sonya Huang</span></li>
+        <li><a href="https://www.linkedin.com/posts/patrick-toulme-150b041a5_i-recently-joined-the-google-tpu-xla-team-share-7449534196886167552-T-9x">On the Google TPU/XLA team</a> <span class="who">· Patrick Toulme</span></li>
+        <li><a href="https://www.linkedin.com/posts/tianqi-chen-679a9856_what-will-the-role-of-ai-compilers-be-in-share-7474888227657764865-hJcI">The role of AI compilers</a> <span class="who">· Tianqi Chen</span></li>
+        <li><a href="https://www.linkedin.com/posts/thesubhoghosh_fp4-attention-has-a-really-funny-bottleneck-share-7481962280373346304-xQHO">FP4 attention's funny bottleneck</a> <span class="who">· thesubhoghosh</span></li>
+        <li><a href="https://www.linkedin.com/posts/ashgopi_google-proved-their-kv-cache-compression-ugcPost-7446891962378596352-jrzI">Google's KV-cache compression</a> <span class="who">· ashgopi</span></li>
+        <li><a href="https://www.linkedin.com/posts/sean-young-312258371_mit-and-nvidia-just-detonated-the-kv-cache-share-7447840257334669312-vP-k">MIT/NVIDIA "detonated" the KV cache</a> <span class="who">· Sean Young</span></li>
+        <li><a href="https://www.linkedin.com/posts/chamath_asml-is-the-only-company-capable-of-manufacturing-share-7470508836311814144-qtRF">ASML / EUV as the chokepoint</a> <span class="who">· Chamath</span></li>
+        <li><a href="https://www.linkedin.com/posts/marco-berlot-1a9385117_orbax-distributed-checkpointing-with-jax-share-7465472592154488832-bC4D">Orbax — distributed checkpointing (JAX)</a> <span class="who">· Marco Berlot</span></li>
+        <li><a href="https://www.linkedin.com/posts/tejashrshah_what-cant-be-performant-in-native-jaxxla-share-7453525582694457345-v9Bg">Native JAX/XLA performance</a> <span class="who">· Tejash Shah</span></li>
+        <li><a href="https://www.linkedin.com/posts/nathan-sircombe_in-recent-months-our-team-at-arm-has-helped-share-7491476710782078976-m0b0">Arm's inference work</a> <span class="who">· Nathan Sircombe</span></li>
+      </ul>
+    </details>
+  </div>
+
+  <!-- 7 -->
+  <div class="model" id="av">
+    <h2>7 · The autonomous-driving stack (end-to-end vs. modular)</h2>
+    <p class="oneline">The field is converging on reasoning, world-model-grounded end-to-end driving — with closed-loop sim as the validation backbone.</p>
+    <h3>The model</h3>
+    <p>The long-running axis is <b>modular</b> (perception → prediction → planning, each testable) vs. <b>end-to-end</b> (sensors → trajectory, learned jointly). The 2026 synthesis — visible in NVIDIA's <b>Alpamayo</b> line — is end-to-end but with explicit <b>reasoning</b> and world-model grounding: a VLA-for-driving that predicts scene dynamics and explains its plan, rather than a black box. The other half of the stack is <b>simulation and scenario generation</b> — controllable driving-video generation (AnyScene) and neuro-symbolic scenario synthesis — because closed-loop eval on rare, safety-critical events is the only way to validate. Safety engineering wraps the whole thing.</p>
+    <p class="dim">This is your home turf; the durable frame is the triangle of <b>end-to-end learning ↔ world-model/sim for data &amp; eval ↔ safety cases</b>, with the open debate being how much explicit reasoning/structure to keep vs. learn.</p>
+    <h3>Tensions / open questions</h3>
+    <ul class="tension">
+      <li><b>End-to-end vs. modular:</b> where to keep structure for safety/debuggability.</li>
+      <li><b>Sim fidelity &amp; controllability</b> for long-tail scenario coverage.</li>
+      <li><b>Reasoning traces</b> in driving — real explainability or post-hoc?</li>
+    </ul>
+    <details>
+      <summary>Sources from your inbox (13)</summary>
+      <ul class="srcs">
+        <li><a href="https://www.linkedin.com/posts/marco-pavone-stanford_alpamayo-ugcPost-7490424143088082944-yqZI">Alpamayo</a> <span class="who">· Marco Pavone</span></li>
+        <li><a href="https://www.linkedin.com/posts/marco-pavone-stanford_alpamayo-reasoning-physical-share-7465932050387202048-bVcQ">Alpamayo — reasoning · physical</a> <span class="who">· Marco Pavone</span></li>
+        <li><a href="https://www.linkedin.com/posts/marco-pavone-stanford_it-was-great-discussing-the-future-of-autonomy-ugcPost-7468029858158256128-N1_A">The future of autonomy</a> <span class="who">· Marco Pavone</span></li>
+        <li><a href="https://www.nvidia.com/en-us/on-demand/playlist/gtc26-nvidia-alpamayo/">Alpamayo — GTC playlist</a> <span class="who">· NVIDIA</span></li>
+        <li><a href="https://www.thedriverlessdigest.com/p/how-nvidia-alpamayo-is-accelerating">How NVIDIA Alpamayo is accelerating AV (Matt Cragun)</a> <span class="who">· Driverless Digest</span></li>
+        <li><a href="https://www.linkedin.com/posts/riawe_anyscene-towards-highly-controllable-driving-share-7468173337156919296-ENcp">AnyScene — controllable driving generation</a> <span class="who">· riawe</span></li>
+        <li><a href="https://www.linkedin.com/posts/riawe_guiding-neuro-symbolic-scenario-generation-share-7465817816458383362-G-_I">Neuro-symbolic scenario generation</a> <span class="who">· riawe</span></li>
+        <li><a href="https://www.linkedin.com/posts/yuanfei-lin-6a2791171_autonomousvehicles-llm-safety-share-7492147737845452801-chyK">Autonomous vehicles · LLM · safety</a> <span class="who">· Yuanfei Lin</span></li>
+        <li><a href="https://www.linkedin.com/posts/yuan-gao-tum_autonomousdriving-iros2026-llm-ugcPost-7490899092668203009-3QyE">Autonomous driving · IROS 2026 · LLM</a> <span class="who">· Yuan Gao</span></li>
+        <li><a href="https://www.linkedin.com/posts/zihao-sheng_eccv2026-autonomousdriving-worldactionmodel-share-7473549503036407808-C3bg">ECCV — AV world-action model</a> <span class="who">· Zihao Sheng</span></li>
+        <li><a href="https://www.linkedin.com/posts/one-of-the-biggest-questions-about-end-to-end-ugcPost-7489388989683232768-3Xnt">The biggest question about end-to-end</a></li>
+        <li><a href="https://www.linkedin.com/posts/nicholaschangcd_autonomousdriving-physicalai-safetyengineering-share-7491021173183369218-9XYe">AD · physical AI · safety engineering</a> <span class="who">· Nicholas Chang</span></li>
+        <li><a href="https://www.linkedin.com/posts/royden-wagner-35843919b_workshop-on-autonomous-driving-share-7464708756077965312-CKTu">Workshop on Autonomous Driving</a> <span class="who">· Royden Wagner</span></li>
+      </ul>
+    </details>
+  </div>
+
+  <!-- 8 -->
+  <div class="model" id="frontier">
+    <h2>8 · Frontier watching: architecture, scaling &amp; economics</h2>
+    <p class="oneline">The overflow bucket — model-architecture evolution and the money/scaling narrative that the live thread tracks in depth.</p>
+    <h3>The model</h3>
+    <p>A looser cluster of "where is the frontier going" reading: the <b>architecture lineage</b> from "Attention Is All You Need" through DeepSeek V4 to Kimi K3 (MoE, long context, efficiency tricks); the <b>scaling &amp; exploration</b> debate (energy-based framings, "do giant models really need all those parameters"); and the <b>economics</b> — open-weights-and-national-competitiveness, the "$600B question," and "token capital" as the new CEO framing. Two items here are live cross-links into the Reading Thread: <span class="xlink">"memory becomes an action space"</span> feeds the Metis native-memory entry, and Faire's <span class="xlink">"Autoscience: agent-driven ML exploration"</span> is an early, concrete instance of the <em>AI-as-autonomous-researcher</em> trend (Discovery Loop).</p>
+    <p class="dim">These are the items most likely to "graduate" into dated Reading-Thread entries when they sharpen — kept here as durable background rather than news.</p>
+    <h3>Tensions / open questions</h3>
+    <ul class="tension">
+      <li><b>Is scaling still the main axis</b>, or is it exploration / data / architecture now?</li>
+      <li><b>Open weights vs. closed</b> as national/industrial strategy.</li>
+      <li><b>The economics</b> — is the capex justified by revenue, or an "AI psychosis"?</li>
+    </ul>
+    <details>
+      <summary>Sources from your inbox (14)</summary>
+      <ul class="srcs">
+        <li><a href="https://www.linkedin.com/pulse/from-attention-all-you-need-kimi-k3-reflection-nearly-hemanth-neehar-wykgf">From "Attention Is All You Need" to "Kimi K3"</a> <span class="who">· Hemanth</span></li>
+        <li><a href="https://www.linkedin.com/posts/kim-branson-b864963_reading-the-kimi-k3-blog-httpslnkdin-share-7483903511525609473-TE7y">Reading the Kimi K3 blog</a> <span class="who">· Kim Branson</span></li>
+        <li><a href="https://www.linkedin.com/posts/ajay-sharma-5451633_openweights-llms-kimik3-share-7489776700239527936-HtNY">Open weights · Kimi K3</a> <span class="who">· Ajay Sharma</span></li>
+        <li><a href="https://www.linkedin.com/posts/aleksagordic_deepseek-v4-pro-summary-building-llms-is-share-7454215952537341952-pdqG">DeepSeek V4 Pro — summary</a> <span class="who">· Aleksa Gordić</span></li>
+        <li><a href="https://www.linkedin.com/posts/alexiglad_progress-in-ai-has-been-driven-by-scaling-share-7489025335456530433-hHyq">Progress driven by scaling (energy-based)</a> <span class="who">· Alex Iglad</span></li>
+        <li><a href="https://www.linkedin.com/posts/turns-out-giant-ai-models-only-need-29-neurons-share-7471169972258574337-M-oD">Giant AI models "only need 29 neurons"</a></li>
+        <li><a href="https://www.linkedin.com/posts/daphne-koller-4053a820_open-weights-and-american-ai-leadership-share-7486604887846187009-5Yq8">Open weights &amp; American AI leadership</a> <span class="who">· Daphne Koller</span></li>
+        <li><a href="https://www.linkedin.com/posts/david-cahn-60150793_i-decided-to-update-ais-600b-question-share-7480716533833596928-hASj">AI's $600B question (updated)</a> <span class="who">· David Cahn</span></li>
+        <li><a href="https://www.linkedin.com/pulse/satya-nadella-ceos-need-thinking-token-capital-reid-hoffman-1mnkc">Satya Nadella: CEOs need to think about "token capital"</a> <span class="who">· Reid Hoffman</span></li>
+        <li><a href="https://www.linkedin.com/posts/raj-agrawal-kkr_when-we-launched-kkrs-infrastructure-business-activity-7490041566083043329-st7t">KKR infrastructure investing</a> <span class="who">· Raj Agrawal</span></li>
+        <li><a href="https://www.linkedin.com/posts/omarsar_memory-becomes-an-action-space-great-share-7480641362938277888-d_H-">Memory becomes an action space <span class="xlink">↔ Metis entry</span></a> <span class="who">· omarsar</span></li>
+        <li><a href="https://www.linkedin.com/posts/omarsar_new-research-from-meta-building-synthetic-share-7476000784891981824-7Q23">Meta — building synthetic data</a> <span class="who">· omarsar</span></li>
+        <li><a href="https://craft.faire.com/autoscience-how-we-built-agent-driven-ml-exploration-at-faire-f3183e7deb29">Autoscience — agent-driven ML exploration <span class="xlink">↔ Discovery Loop</span></a> <span class="who">· Faire</span></li>
+        <li><a href="https://www.linkedin.com/posts/sarahxguo_the-mid-2026-investors-ai-psychosis-nothing-ugcPost-7470279294351650816-LIU0">Mid-2026 investor "AI psychosis"</a> <span class="who">· Sarah Guo</span></li>
+      </ul>
+    </details>
+  </div>
+
+  <footer>
+    Companion to the <a href="index.html" style="color:var(--accent)">Reading Thread</a>. These are durable frameworks synthesized from ~200 articles you saved (Apr–Aug 2026); the syntheses are field-level mental models, and the collapsible lists are your source readings. When one of these areas produces something genuinely new, it graduates into a dated entry on the thread. Personal / non-article items in the inbox were skipped.
+  </footer>
+
+</div>
+</body>
+</html>
