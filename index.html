@@ -98,7 +98,7 @@
   <header class="top">
     <h1>Reading Thread</h1>
     <p class="sub">A running log of things worth reading — each one distilled into what it should <em>change or confirm</em> in the mental model, so broader meta-trends surface over time.</p>
-    <p class="meta-note">Started Aug 11, 2026 · 9 readings · drop a link anytime and I'll add an entry and re-check the trends.</p>
+    <p class="meta-note">Started Aug 11, 2026 · 24 readings · drop a link anytime and I'll add an entry and re-check the trends.</p>
     <p style="margin-top:10px"><a href="mental-models.html" style="color:var(--accent);text-decoration:none;font-weight:600;border-bottom:1px solid var(--line)">📚 Companion: Ongoing Mental Models →</a> <span style="color:var(--faint);font-size:13px">— durable, slow-changing models synthesized from your saved readings</span></p>
   </header>
 
@@ -107,8 +107,8 @@
     <div class="trends">
       <div class="trend">
         <h3>The financialization of compute</h3>
-        <p>AI infrastructure is being reframed from <em>capex on a tech company's balance sheet</em> into a <em>financeable asset class</em> — GPUs as revenue-generating, securitizable assets funded by private credit, not just equity and corporate debt. Watch whether "compute" starts trading and being underwritten like real estate or energy infrastructure.</p>
-        <p class="count">Seen in: 1 event, now a consolidating frame — Nvidia's own "AI factory / investable asset class" messaging plus third-party analysis · confidence: building</p>
+        <p>AI infrastructure is being reframed from <em>capex on a tech company's balance sheet</em> into a <em>financeable asset class</em> — GPUs as revenue-generating, securitizable assets funded by private credit, not just equity and corporate debt. It's now escalating from financing into a full <em>markets stack</em>: independent <b>benchmarks/indexes to price</b> compute (Silicon Data) and <b>exchange-traded futures to hedge</b> it (CME Group, launching Oct 5) — the same benchmarks → forward-curves → derivatives path energy took. "Capital finances compute; indexes price compute; futures hedge compute." <b>Counter-pressure</b> (Eisman): the whole edifice assumes OpenAI/Anthropic sustain revenue — but they're ~70% of hyperscaler AI revenue with "no moats," so a cheap-model price war is the <em>correlated-default risk</em> the "energy asset class" analogy glosses over.</p>
+        <p class="count">Seen in: 2 developments — Nvidia/Wall-St $500B financing (CNBC) + CME/Silicon Data compute futures · confidence: strengthening (financing → pricing → hedging layers all now forming)</p>
       </div>
       <div class="trend">
         <h3>Reasoning is going invisible</h3>
@@ -118,8 +118,14 @@
 
       <div class="trend">
         <h3>The efficiency &amp; specialization frontier</h3>
-        <p>The binding constraint is shifting from <em>training scale</em> to <em>inference latency and energy</em> — and the lever is specialized silicon, extreme low precision, and minimizing data movement (Dean: moving data from HBM to compute costs ~1000× a single multiply). Bigger clusters give way to co-designed, efficient inference; "specialization is the next battleground." The same push is putting capable, increasingly open-weight <em>agentic</em> models onto local/edge hardware via distillation + 4-bit quant + speculative decoding (Muse Glimmer). And it shows up at <em>training</em> time too: mid-training / continued-pretraining anneal data toward targeted quality and lean on cheap proxy runs rather than brute-force scaling.</p>
-        <p class="count">Seen in: 4 readings across training + inference — Dean talk, distillation-efficiency paper, Muse Glimmer, mid-training notes · confidence: strengthening</p>
+        <p>The binding constraint is shifting from <em>training scale</em> to <em>inference latency and energy</em> — and the lever is specialized silicon, extreme low precision, and minimizing data movement (Dean: moving data from HBM to compute costs ~1000× a single multiply). Bigger clusters give way to co-designed, efficient inference; "specialization is the next battleground." The same push is putting capable, increasingly open-weight <em>agentic</em> models onto local/edge hardware via distillation + 4-bit quant + speculative decoding (Muse Glimmer). And it shows up at <em>training</em> time too: mid-training / continued-pretraining anneal data toward targeted quality and lean on cheap proxy runs rather than brute-force scaling. On the memory side, the KV cache is being disaggregated off-HBM into a tiered memory fabric (NVIDIA CMX / BlueField-4). The sharpest framing: infra strategy is becoming <em>placement, not scale</em> — <em>where</em> compute runs (edge / cloud / even orbit), <em>which</em> hardware runs each phase (heterogeneous inference), and AI-generated kernels lowering <em>who</em> can optimize. And value is concentrating in <em>workload-specialized inference runtimes</em> (LightSeek/TokenSpeed for agentic) rather than generic serving frameworks.</p>
+        <p class="count">Seen in: 7 readings across training + inference — Dean talk, distillation-efficiency paper, Muse Glimmer, mid-training notes, NVIDIA CMX KV-offload, YC Paper Club "placement not scale", LightSeek inference-value thesis · confidence: strengthening</p>
+      </div>
+
+      <div class="trend">
+        <h3>World-Action Models: the embodied stack converges <span style="font-size:12px;color:var(--faint);font-weight:400">· strengthening</span></h3>
+        <p>In robotics, <b>VLAs</b> (great at semantics, weak at unseen physical motion) are merging with <b>world models</b> (physical dynamics) into <b>World-Action Models</b> that jointly predict future world state <em>and</em> action. This is unlocking zero-shot physical generalization (DreamZero: 2.2× over VLA baselines; cross-embodiment on 30 min of data) and reframes simulation as world-model + physics working together (Jaipuria's stack). NVIDIA now names it outright — a WAM <b>replaces the VLA's VLM backbone with a video world model</b> ("describe the world" → "predict how it evolves"), shipping Cosmos 3 as the foundation model. The embodied policy of record is becoming <em>a world model with an action head</em>, not a VLM with an action head.</p>
+        <p class="count">Seen in: 3 readings (DreamZero, simulation-stack, NVIDIA "Beyond VLAs" / Cosmos 3) atop deep background in the <a href="mental-models.html#vla">VLA</a> / <a href="mental-models.html#world-models">world-model</a> models · confidence: strengthening — now vendor-articulated as the successor paradigm to VLAs</p>
       </div>
 
       <div class="trend">
@@ -129,15 +135,447 @@
       </div>
 
       <div class="trend">
-        <h3>AI as autonomous researcher <span style="font-size:12px;color:var(--faint);font-weight:400">· early signal</span></h3>
-        <p>The ambition is shifting from AI-as-research-<em>tool</em> to AI-as-<em>researcher</em> — systems that run the full loop (propose → run → evaluate → iterate) at scale. Jeff Dean &amp; co.'s Discovery Loop is the flagship bet (start by automating ML research itself, then generalize to chip design, biology, materials), echoing the "AI-designs-hardware flywheel" from Dean's own talk and the broader self-driving-lab movement.</p>
-        <p class="count">Seen in: 1 reading + related note in Dean's talk · caveat: evidence still Dean-adjacent · confidence: early signal</p>
+        <h3>AI as autonomous researcher <span style="font-size:12px;color:var(--faint);font-weight:400">· strengthening</span></h3>
+        <p>The ambition is shifting from AI-as-research-<em>tool</em> to AI-as-<em>researcher</em> — systems that run the full loop (propose → run → evaluate → iterate) at scale. Two strands now converge: <b>autonomous ML-research labs</b> (Jeff Dean &amp; co.'s Discovery Loop; Autoscience) and <b>physical self-driving labs</b> in chemistry / materials / bio (Argonne, Nature multi-agent materials labs, academic "AI scientists" running their own experiments). As execution automates, the scarce human role migrates to <em>taste</em> — choosing which hypotheses are worth running (Dean's point, echoed across the field). Sakana AI adds a concrete <b>4-stage progression</b> — agent-native models → automated science → self-rewriting architectures → democratized/cheap RSI — and a contrasting <em>sample-efficiency</em> philosophy ("ideas over compute") to Discovery Loop's compute-scale bet. And <b>Recursive Superintelligence</b> shows a <b>working first-step system</b> — an automated research loop making measured gains on real AI-research benchmarks (LM training, GPU kernels), with <em>reward-hacking detection</em> as the load-bearing safety piece.</p>
+        <p class="count">Seen in: 4 readings (Discovery Loop, autonomous-AI-labs survey, Sakana RSI Lab, Recursive "first steps") — spanning vision → staged roadmap → working demonstration · confidence: strengthening</p>
       </div>
     </div>
   </section>
 
   <section>
     <p class="section-title">Readings</p>
+
+    <article class="entry">
+      <div class="kicker">
+        <span>arXiv 2608.10327</span><span class="dot"></span><span>Aug 2026</span><span class="dot"></span><span>via Andrew Smart (Google Research, LinkedIn)</span><span class="sig sig-struct">Structural shift</span>
+      </div>
+      <h2><a href="https://arxiv.org/abs/2608.10327" target="_blank" rel="noopener">Toward a Theory of Value in AI Alignment</a></h2>
+      <p class="summary">A new preprint (Andrew Smart, Google Research + Abeba Birhane, Shazeda Ahmed, Jackie Kay, Jimmy Tobin, Kris Shrishak; rubric help from philosopher Sally Haslanger) asks a deceptively simple question: <b>how does the AI value-alignment field actually define "human values"?</b> They snowball-sampled ~100 alignment papers from 4 canonical ones and annotated them against philosophical, anthropological, and psychological theories of value. Findings: despite the "value alignment" branding, <b>90% of the papers don't define values at all</b>; in practice, alignment is <b>de facto built on economic theory / utility maximization</b> (sometimes explicit, usually not), and <b>few papers question whether that's the right framework</b>. They frame this via Graeber's <em>Toward an Anthropological Theory of Value</em> (which attacks the economic view as cynical and narrow) and <em>The Blind Spot</em> (Frank, Gleiser &amp; Thompson — economics models idealized, reductionist, fictional agents). Their open question: when, why, and how did alignment adopt <b>utilitarianism + rational-choice / economic theory</b> as its implicit value framework?</p>
+
+      <div class="update">
+        <div class="lbl">Model update</div>
+        <ul>
+          <li>Reframes how to read the entire alignment literature: "align to human values" mostly means "optimize a utility function," with the value theory left <em>unstated</em>. Seeing RLHF / DPO / IRL / preference optimization, ask: <b>aligned to <em>what</em> notion of value?</b> — usually an implicit economic-utility one.</li>
+          <li>The <b>90%-don't-define-values</b> finding is the load-bearing claim: the field's conceptual foundation is thin, not that the math is wrong. Skeptical lens for your own RL / reward-modeling: <b>your reward function IS your operationalized theory of value</b> — make it explicit.</li>
+          <li>Deepens (doesn't just repeat) the <b>"capability outrunning guardrails"</b> picture: the guardrail isn't only <em>late</em> — its foundations are <em>unexamined</em>. A different failure mode than "oversight can't see the reasoning."</li>
+          <li>Bridge to your <a href="mental-models.html#anti-intellectualism" style="color:var(--accent)">anti-intellectualism model (#11)</a>: both are about <b>unexamined assumptions dressed as rigor</b> — here, economic formalism standing in for a theory of value it never states.</li>
+        </ul>
+      </div>
+
+      <p class="watch"><b>Note:</b> a critical / foundations paper (empirically grounded in a 100-paper sample), not a capability result. <b>Watch:</b> does the field respond with explicit value theories or defend utility as sufficient · pluralistic / anthropological alignment approaches · whether this changes reward-model design in practice.</p>
+
+      <div class="tags">
+        <span class="tag">AI alignment</span>
+        <span class="tag">Value theory / ethics</span>
+        <span class="tag">RLHF / preference optimization</span>
+        <span class="tag">Critical AI studies</span>
+        <span class="tag">Economics of utility</span>
+        <span class="tag">Foundations</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="kicker">
+        <span>LinkedIn · Max Buckley</span><span class="dot"></span><span>Aug 2026</span><span class="dot"></span><span>explainer · RTC papers</span><span class="sig sig-inc">Incremental · craft</span>
+      </div>
+      <h2><a href="https://www.pi.website/research/real_time_chunking" target="_blank" rel="noopener">Real-Time Chunking: running slow VLAs at fast control rates</a></h2>
+      <p class="summary">Buckley's clean explainer of the timing problem unique to robot foundation models. A VLA like Physical Intelligence's <b>pi-0.5 controls at 50 Hz</b> (one action / 20 ms), but a <b>single forward pass takes ~76 ms</b> (+ network latency if remote) — the model literally can't think fast enough to plan one step at a time. Two extremes: <b>(1) replan every action</b> (fully closed-loop) = gold standard for reactivity but <em>physically impossible</em> on real hardware (the action is stale by the time it arrives; only works in a sim that waits); <b>(2) predict 40–50-action chunks</b> (~1 s of motion) and execute open-loop = smooth but <em>unreactive</em> (object shifts or grip slips mid-chunk → running a plan built on a second-old world). The obvious compromise — 50-action chunk, replan every ~8 steps, generate the next chunk while the current executes — but naive chunk-switching is <b>jerky</b>: the action distribution is multimodal, so adjacent chunks jump between different "strategies," and that seam is a distribution shift the model never saw in training (temporal ensembling isn't guaranteed valid). <b>Real-Time Chunking (RTC)</b> reframes the seam as an <b>inpainting problem</b>: while chunk N executes, generate chunk N+1 but <b>freeze the actions guaranteed to run during the inference delay</b> and inpaint the rest to be consistent with that frozen prefix — continuity <em>without</em> losing reactivity, works with any diffusion/flow VLA at inference time, no retraining. Catch: it uses pseudoinverse guidance (a vector-Jacobian product every denoising step), so the latency fix adds latency (~97 ms vs ~76 ms/chunk). The <b>follow-up closes the loop</b>: simulate the inference delay <em>at training time</em> and condition on the action prefix directly — a few extra lines of training code, zero inference-time overhead, and it <em>outperforms</em> inference-time RTC at high delays.</p>
+
+      <div class="update">
+        <div class="lbl">Model update</div>
+        <ul>
+          <li>Core constraint to internalize: for embodied policies <b>the model is slower than the control loop</b>, so "closed-loop reactivity" is a <em>systems</em> problem, not just a modeling one. Every VLA/WAM deployment lives on the reactivity↔smoothness axis; RTC is the current best answer to the seam.</li>
+          <li>Direct read-across to your <b>on-vehicle / AV inference</b>: same structure (policy slower than control rate). "Freeze the guaranteed-to-execute prefix, inpaint the rest" is a generalizable pattern for any async-inference control loop.</li>
+          <li>Completes the WAM/VLA trend on the <b>deployment side</b>: DreamZero's 38×→7 Hz and Cosmos-Edge's 15 Hz make the model <em>fast</em>; RTC makes the chunk <em>seams</em> safe. Speed + seam-handling are the two halves of real-time embodied deployment.</li>
+          <li>The training-time version is the tell: <b>bake the deployment constraint (inference delay) into training</b> rather than patch at inference — same lesson as mid-training's "co-design training with the deployment target." Prefer training-time conditioning over inference-time guidance when you can.</li>
+        </ul>
+      </div>
+
+      <p class="watch"><b>Papers:</b> RTC = "Real-Time Execution of Action Chunking Flow Policies" (<a href="https://arxiv.org/abs/2506.07339" target="_blank" rel="noopener">arXiv 2506.07339</a>, Physical Intelligence); training-time follow-up (<a href="https://arxiv.org/abs/2512.05964" target="_blank" rel="noopener">arXiv 2512.05964</a>). <b>Watch:</b> adoption beyond pi · interaction with WAM (diffusion/flow) backbones at higher control rates · whether prefix-conditioning generalizes to AV planners.</p>
+
+      <div class="tags">
+        <span class="tag">Real-time control</span>
+        <span class="tag">VLA / action chunking</span>
+        <span class="tag">Inference latency</span>
+        <span class="tag">Diffusion / flow policies</span>
+        <span class="tag">Physical Intelligence</span>
+        <span class="tag">On-vehicle / async inference</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="kicker">
+        <span>NVIDIA (dev blog)</span><span class="dot"></span><span>Aug 4, 2026</span><span class="dot"></span><span>explainer + Cosmos 3</span><span class="sig sig-struct">Structural shift</span>
+      </div>
+      <h2><a href="https://developer.nvidia.com/blog/beyond-vlas-how-world-action-models-reshape-robot-manipulation/" target="_blank" rel="noopener">Beyond VLAs: How World-Action Models Reshape Robot Manipulation</a></h2>
+      <p class="summary">NVIDIA's explicit articulation of the <b>WAM thesis</b>: a World-Action Model <b>replaces the VLA's VLM backbone with a video world model</b> — shifting from "describe the world" to "predict how it evolves," so the policy carries a <b>physics prior</b>. WAMs <b>jointly predict future video frames + robot actions</b>, and post-training then "specializes a model that already has a physics prior" rather than teaching dynamics from scratch (vs. VLAs bolting an action head onto semantic reasoning). Three claimed advantages: <b>diverse-data utilization</b> (physics transfers across datasets, cutting collection cost), <b>open-world generalization</b> (physical principles beat semantic mappings on novel objects/scenes), and <b>few-shot embodiment adaptation</b>. Concrete instance — <b>NVIDIA Cosmos 3</b>: a Mixture-of-Transformers trained on 767M images / 348M videos / 8M action samples; the omni checkpoint raised RoboLab success <b>28.1% → 36.8%</b>; shipped as Cosmos3-Nano-Policy-DROID (16B, workstation) and <b>Cosmos3-Edge-Policy-DROID (4B, on-device Jetson at 15 Hz)</b>. NVIDIA frames WAMs as the <b>successor paradigm to VLAs</b>.</p>
+
+      <div class="update">
+        <div class="lbl">Model update</div>
+        <ul>
+          <li>Clearest first-party confirmation yet of your WAM trend: NVIDIA <em>defines</em> the shift as "replace the VLM backbone with a video world model" — the "world model with an action head, not a VLM with an action head" framing, now vendor-official. Pairs with DreamZero as the empirical result.</li>
+          <li>The generative-vs-JEPA world-model debate (<a href="mental-models.html#world-models" style="color:var(--accent)">§1</a>) resolves <em>pragmatically</em>: a <b>generative</b> video-prediction world model is being used as the policy backbone <em>because the physics prior transfers</em> — useful even if it's not the "be-useful-not-look-real" ideal.</li>
+          <li>Edge angle: a <b>4B WAM on Jetson at 15 Hz</b> is the efficiency frontier meeting embodied — real-time on-device control from a world-model policy is now a <em>shipped</em> artifact, relevant to on-vehicle inference.</li>
+          <li>Data-cost thesis: "physics transfers across datasets" is the answer to the robotics data bottleneck (Jaipuria) — the WAM is the mechanism that makes diverse / less-curated data useful.</li>
+        </ul>
+      </div>
+
+      <p class="watch"><b>Watch:</b> RoboLab 28→37% is real but modest — does the WAM edge widen with scale? · generative world-model drift/hallucination in closed loop · Cosmos 3 vs DreamZero vs open WAMs · whether the 4B edge model holds reliability.</p>
+
+      <div class="tags">
+        <span class="tag">World-Action Models (WAM)</span>
+        <span class="tag">VLA</span>
+        <span class="tag">World models</span>
+        <span class="tag">Robot manipulation</span>
+        <span class="tag">NVIDIA Cosmos 3</span>
+        <span class="tag">Edge / on-device</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="kicker">
+        <span>CNBC</span><span class="dot"></span><span>Aug 13, 2026</span><span class="dot"></span><span>via Apple News</span><span class="sig sig-emerg">Emerging direction</span>
+      </div>
+      <h2><a href="https://www.cnbc.com/2026/08/13/big-short-investor-steve-eisman-sees-an-achilles-heel-in-the-ai-boom.html" target="_blank" rel="noopener">The AI boom's Achilles heel: Steve Eisman on concentration risk</a></h2>
+      <p class="summary">'Big Short' investor Steve Eisman argues the AI boom has become <b>dangerously concentrated around two private companies</b> — OpenAI and Anthropic — which together account for <b>~70% of AI-related revenue at Microsoft, Amazon, Google, and Oracle</b>. The hyperscalers have effectively <b>staked their futures (and capex)</b> on those two succeeding. His deeper worry (from the surrounding interviews): AI has <b>"no moats" — "not a recipe for longevity"</b> — and cheap Chinese / open models could trigger a <b>price war that wrecks OpenAI/Anthropic valuations</b> ("I'd be petrified" running either). The Achilles heel: the entire buildout's revenue assumptions rest on two firms whose <b>pricing power is the fragile link</b>.</p>
+
+      <div class="update">
+        <div class="lbl">Model update</div>
+        <ul>
+          <li><b>The bear counterweight to the SemiAnalysis entry below.</b> SemiAnalysis's whole case rests on inference earning ~$100B/GW/yr; Eisman's point is that <em>that margin is the fragile assumption</em> — no moats + cheap models → price war → the $100B could compress toward the ~$12B cost. Hold both: bull (inference is hugely profitable) vs. bear (that profit has no moat).</li>
+          <li><b>Concentration is the systemic-risk lens</b> for the financialization trend: if compute is financed/priced/hedged as an asset on the premise that OpenAI/Anthropic generate the revenue, then ~70% dependence on two firms is exactly the <b>correlated-default risk</b> the "energy became an asset class" analogy glosses over.</li>
+          <li>Ties the <b>commoditization thread</b> together: DeepSeek/Kimi + open weights (Muse Glimmer) + "no moats" = the price-war mechanism. The open-source and Taiwan/geopolitics strands all feed one question — <em>can the model layer hold margin?</em></li>
+          <li>Caveat: Eisman is a famous short-seller talking his book (bear bias). The ~70% concentration is the durable fact; "wreck valuations" is a thesis.</li>
+        </ul>
+      </div>
+
+      <p class="watch"><b>Watch:</b> does $/token keep deflating toward cost (margin compression) · do OpenAI/Anthropic build durable moats (distribution, agents, integration) · does the ~70% concentration diversify · first cracks in hyperscaler AI-revenue guidance.</p>
+
+      <div class="tags">
+        <span class="tag">AI economics</span>
+        <span class="tag">Concentration / systemic risk</span>
+        <span class="tag">Moats / commoditization</span>
+        <span class="tag">Bubble watch</span>
+        <span class="tag">Financialization of compute</span>
+        <span class="tag">Bear case</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="kicker">
+        <span>Recursive Superintelligence</span><span class="dot"></span><span>Jun 11, 2026</span><span class="dot"></span><span>via LinkedIn Pulse</span><span class="sig sig-struct">Structural shift</span>
+      </div>
+      <h2><a href="https://www.recursive.com/articles/first-steps-toward-automated-ai-research" target="_blank" rel="noopener">First Steps Toward Automated AI Research</a></h2>
+      <p class="summary">Recursive Superintelligence (Jeff Clune &amp; co.) built a <b>working automated AI-research system</b>: it loops <b>propose → implement → run experiments → validate → use findings to guide the next round</b>, running <b>multiple research threads in parallel</b>, keeping context across runs, and — crucially — <b>validating gains against reward hacks</b> before accepting them as real. Tested on three fast-feedback benchmarks: fixed-budget LM training (<b>NanoChat</b>: 0.9109 BPB vs 0.9372 prior best, ~<b>1.3× speedup</b> to the same loss), fast-training-to-target-loss (<b>NanoGPT Speedrun</b>: 79.7s → 77.5s), and <b>GPU-kernel optimization</b> (SOL-ExecBench: 0.754 vs 0.699, <b>18% reduction in gap-to-optimal</b>). Framed explicitly as <em>early steps</em> toward automating frontier research and reducing the cost of intelligence — with <b>reward hacking</b> called out as a persistent challenge needing ever-better detection (safety framed as co-equal with capability).</p>
+
+      <div class="update">
+        <div class="lbl">Model update</div>
+        <ul>
+          <li>Moves the autonomous-researcher trend from vision/roadmap to a <b>working demonstration</b> — an automated loop making measured gains on real AI-research tasks, and notably <b>recursive</b> ones (it's improving LM training and GPU kernels, the substrate AI itself is built on).</li>
+          <li>The load-bearing safety insight: <b>reward-hacking detection is THE bottleneck for RSI</b> — the system has to verify that "improvement" is genuine, not gamed. That's your "capability outrunning guardrails" trend at the RSI frontier, and it rhymes with the CoT-monitoring problem (real reasoning vs plausible-looking gaming).</li>
+          <li>Calibrate: gains are <b>modest</b> (1.3× speedup, 18% gap reduction) on small/fast benchmarks — genuinely "first steps." The open question is whether the loop <b>compounds</b> at frontier scale or plateaus.</li>
+          <li>Empirical counterpart to <b>Sakana's staged framing</b> (both trace to Clune's open-ended-algorithms / Darwin Gödel Machine lineage) — roadmap meets working demo.</li>
+        </ul>
+      </div>
+
+      <p class="watch"><b>Watch:</b> does the loop <em>compound</em> (recursive gains) or saturate · reward-hacking-detection robustness · scaling from NanoGPT-class to frontier · Recursive vs Discovery Loop vs Sakana as competing RSI programs.</p>
+
+      <div class="tags">
+        <span class="tag">Recursive self-improvement</span>
+        <span class="tag">Automated AI research</span>
+        <span class="tag">AI scientist</span>
+        <span class="tag">Reward hacking / safety</span>
+        <span class="tag">Open-ended algorithms</span>
+        <span class="tag">Benchmarks</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="kicker">
+        <span>SemiAnalysis (LinkedIn)</span><span class="dot"></span><span>Aug 2026</span><span class="dot"></span><span>analysis · projection</span><span class="sig sig-struct">Structural shift</span>
+      </div>
+      <h2><a href="https://semianalysis.com/" target="_blank" rel="noopener">SpaceX becomes a compute company — and why inference pays for it</a></h2>
+      <p class="summary">SemiAnalysis argues <b>SpaceX is turning into a compute company</b>: on its first earnings call Elon guided <b>6–8GW (possibly &gt;10GW) of incremental datacenters in 2027 alone</b>; SemiAnalysis sees ~10GW by year-end 2027 and a path to <b>$300B ARR</b>, with AI compute going from nothing to <b>77% of run-rate revenue in eight quarters</b> ($19B → $305B run-rate by 4Q27; AI-compute ~$235B). The <em>why</em>: <b>inference is extremely profitable</b> — their Tokenomics Model shows OpenAI and Anthropic can <em>each</em> generate <b>&gt;$100B/GW/year</b> selling API inference on a GB300 cluster vs <b>~$12B/GW/year rental cost</b> (~8× spread). <b>Microsoft</b> can print the same economics (full OpenAI model access, no training cost, no 20% rev-share; +10GW planned in 8 months), and a SpaceX deal with 90-day cancellation is easy to sign. Can SpaceX build it? <b>Speed above all</b>: Colossus 1's 300MW in 122 days; the Southaven power plant went 27 turbines (~495MW, Feb) → 69 turbines (1.7GW, July); MiniHard ~450–500MW in ~5 months. <b>Energy is the tracked constraint</b> — gas-turbine equipment across 30+ suppliers.</p>
+
+      <div class="update">
+        <div class="lbl">Model update</div>
+        <ul>
+          <li>The economic engine under the whole compute boom, <b>quantified</b>: inference revenue ~$100B/GW/yr vs ~$12B/GW/yr rental cost. That ~8× spread is the <em>why</em> behind the <b>financialization-of-compute</b> trend (compute is a high-return asset <em>because</em> inference margins are huge) and Jeff Dean's "inference is the product."</li>
+          <li>The binding constraint has moved to <b>energy + build-speed, not chips</b>: turbine counts and gas-equipment lead times gate the buildout ("speed above all"). New model input — track <b>power (turbines/MW) and construction cadence</b> as the real bottleneck.</li>
+          <li><b>New entrants via arbitrage:</b> SpaceX (speed + energy + capital) and Microsoft (OpenAI access minus training cost / rev-share) can undercut by owning <em>different</em> parts of the stack — compute economics reshuffle <em>who</em> wins, not just how much gets built.</li>
+          <li>Discipline check: this is a <b>SemiAnalysis projection with aggressive assumptions</b> ($300B ARR, 10GW by 2027, GB300 pricing/utilization). Treat the top-line as a bull case; the durable insight is the <b>unit economics</b> ($100B vs $12B/GW).</li>
+        </ul>
+      </div>
+
+      <p class="watch"><b>Note:</b> full text + chart data captured from your screenshot (SemiAnalysis Tokenomics / Energy models; GB300 revenue/GW: neocloud 5-yr IaaS ~$12B (1.0×) vs B300 on-demand ~$29B (2.4×)). <b>Watch:</b> do inference margins hold as $/token deflates and price wars hit the $100B/GW assumption · real SpaceX build pace vs projection · gas-turbine supply as the true ceiling · whether 90-day-cancellation neocloud deals actually de-risk hyperscaler commitments.</p>
+
+      <div class="tags">
+        <span class="tag">Compute economics</span>
+        <span class="tag">Inference margins</span>
+        <span class="tag">Datacenter buildout</span>
+        <span class="tag">Energy / power constraint</span>
+        <span class="tag">Neocloud</span>
+        <span class="tag">Financialization of compute</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="kicker">
+        <span>CME Group / Silicon Data</span><span class="dot"></span><span>Aug 11, 2026</span><span class="dot"></span><span>market launch · via Carmen Li (LinkedIn)</span><span class="sig sig-struct">Structural shift</span>
+      </div>
+      <h2><a href="https://www.cmegroup.com/media-room/press-releases/2026/8/11/cme_group_and_silicondatatolaunchcomputefuturesonoctober5tounloc.html" target="_blank" rel="noopener">Compute futures: CME Group + Silicon Data (launching Oct 5)</a></h2>
+      <p class="summary">CME Group and Silicon Data will launch <b>exchange-traded compute futures on Oct 5</b>, cash-settled against the <b>Silicon Data index</b> (a benchmark for AI GPU/chip rental prices) — a way to hedge AI compute cost and residual-value risk. Carmen Li (CEO, Compute Exchange / Silicon Data) frames it as the pricing + hedging layer forming atop the financing layer: <b>"Capital finances compute. Indexes price compute. Futures hedge compute."</b> Her argument: if hundreds of billions finance AI factories, investors, lenders, operators, and buyers need <b>transparent pricing</b> — what compute is worth today <em>and</em> tomorrow — plus independent benchmarks, <b>forward price discovery</b>, and tools to manage price and residual-value risk. Explicit analogy to <b>energy becoming a financial asset class</b> (benchmarks → forward curves → derivatives): "when compute becomes an asset, it needs a price; when that price can change, it needs a hedge." Directly extends the CNBC / Jensen Huang "investable asset class" entry below.</p>
+
+      <div class="update">
+        <div class="lbl">Model update</div>
+        <ul>
+          <li>The financialization trend just moved up a layer: from <b>financing</b> (structured private credit, $500B — CNBC) to a full <b>markets stack</b> — <b>pricing</b> (Silicon Data index) + <b>hedging</b> (CME futures + forward curves). The "energy became an asset class" playbook, running fast.</li>
+          <li>Clean three-layer mental model: <b>Capital finances / Indexes price / Futures hedge.</b> A forward curve for compute means the market starts pricing compute's <em>future</em> value — so the <b>GPU depreciation / residual-value question</b> (Burry's worry) becomes a <em>traded number</em>, not just an accounting assumption.</li>
+          <li>For you: compute-cost risk becomes <b>hedgeable</b> — relevant to how AI-infra capex and unit economics get planned; a liquid futures curve would give a real market signal on where GPU rental prices are headed.</li>
+        </ul>
+      </div>
+
+      <p class="watch"><b>Note:</b> Carmen Li is CEO of Silicon Data (the settling index) — an interested party; but CME launching the contract is a hard fact. Full text captured from your screenshot. <b>Watch:</b> does the contract get real liquidity (a genuine forward curve) or stay thin · which benchmark wins as the settlement standard · does residual-value/depreciation risk actually become tradeable · knock-on effects on how data-center financing is underwritten.</p>
+
+      <div class="tags">
+        <span class="tag">Financialization of compute</span>
+        <span class="tag">Compute futures / derivatives</span>
+        <span class="tag">Benchmarks / price discovery</span>
+        <span class="tag">Capital markets</span>
+        <span class="tag">GPU economics</span>
+        <span class="tag">Risk hedging</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="kicker">
+        <span>Sakana AI · RSI Lab</span><span class="dot"></span><span>2026</span><span class="dot"></span><span>lab thesis + role posts</span><span class="sig sig-emerg">Emerging direction</span>
+      </div>
+      <h2><a href="https://sakana.ai/rsi-lab/" target="_blank" rel="noopener">Sakana AI's RSI Lab: recursive self-improvement, staged</a></h2>
+      <p class="summary">Sakana's RSI Lab reframes AI progress away from brute-force scaling toward <b>sample-efficiency</b> and "progress through ideas, not just compute" — Japan's compute constraints treated as a design advantage (a kaizen/continuous-improvement framing). Thesis: AI must move from <b>static tools → autonomous researchers</b>, laid out as a <b>4-stage progression</b>: <b>(1) Agent-Native Models</b> — architectures built for autonomous agents, not chat; <b>(2) The AI Scientist</b> — models running end-to-end automated research that expands scientific knowledge; <b>(3) Recursive Self-Improvement</b> — the inflection point where AI agents <b>write, benchmark, and verify the code of their own foundation architectures</b>; <b>(4) Democratized AI</b> — RSI achievable on modest, sample-efficient compute so smaller nations/institutions can compete. It's backed by real milestones — <b>LLM²</b> (AI discovering training algorithms), the <b>Darwin Gödel Machine</b> (autonomous codebase rewriting), and <b>The AI Scientist</b> (automated discovery published in Nature) — and the lab ties three threads into a loop: <b>frontier LMs + world models</b> (physical-world dynamics from interaction; David Ha / Schmidhuber "World Models"/dreams heritage) <b>+ the recursive loop itself</b>.</p>
+
+      <div class="update">
+        <div class="lbl">Model update</div>
+        <ul>
+          <li>The keeper is the <b>staged progression</b>: RSI isn't one leap but a ladder — agent-native models → automated science → self-rewriting architectures → cheap/democratized RSI. Use it as a yardstick to place any "AI-does-research" claim (which stage is it <em>actually</em> at?).</li>
+          <li>Distinct bet vs. Discovery Loop: Sakana leans <b>sample-efficiency / "ideas over compute"</b>; Discovery Loop leans large-scale compute + parallel loops. Same destination (autonomous researcher), opposite resource philosophy — a clean axis to watch.</li>
+          <li>World models sit <em>inside</em> their RSI loop — linking the <b>World-Action Models</b> trend (above) to the autonomous-researcher one: their path to "act in the physical world" runs through world models, i.e. RSI + embodiment converge.</li>
+          <li>Stage 3 (AI rewriting its own foundation architecture) is exactly where <b>"capability outrunning guardrails"</b> bites — self-modifying systems are the sharp end of the oversight problem.</li>
+        </ul>
+      </div>
+
+      <p class="watch"><b>Sources:</b> the <a href="https://sakana.ai/rsi-lab/" target="_blank" rel="noopener">RSI Lab page</a> + the <a href="https://sakana.ai/careers/member-of-technical-staff-rsi-lab/" target="_blank" rel="noopener">MTS role post</a>. <b>Watch:</b> whether the Darwin Gödel Machine / AI Scientist line actually reaches stage-3 self-rewriting · sample-efficiency vs. compute-scale as the winning RSI recipe · oversight of self-modifying architectures.</p>
+
+      <div class="tags">
+        <span class="tag">Recursive self-improvement</span>
+        <span class="tag">AI scientist / autonomous research</span>
+        <span class="tag">Agent-native models</span>
+        <span class="tag">World models</span>
+        <span class="tag">Sample efficiency</span>
+        <span class="tag">Sakana AI</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="kicker">
+        <span>LinkedIn Pulse · LightSeek Foundation</span><span class="dot"></span><span>2026</span><span class="dot"></span><span>thesis (vendor)</span><span class="sig sig-emerg">Emerging direction</span>
+      </div>
+      <h2><a href="https://www.linkedin.com/pulse/llm-inference-past-now-future-where-does-value-move-lightseek-jakoc" target="_blank" rel="noopener">LLM Inference: Past, Now, Future — Where Does Value Move?</a></h2>
+      <p class="summary">LightSeek (builders of the open-source <b>TokenSpeed</b> engine) argue that as agentic systems generate enormous token volumes, <b>inference efficiency at scale becomes THE bottleneck</b>, and value migrates from generic model-serving toward <b>specialized, workload-specific inference runtimes + compiler/kernel/hardware co-design</b>. The arc: inference was an afterthought → now it's the cost center <em>and</em> the product → future value concentrates in runtimes tuned to a specific workload shape, not one-size-fits-all frameworks. Their proof point, TokenSpeed, targets agentic coding patterns (50K+ contexts, dozens of turns, 70+ tok/s/user) with <b>compiler-backed parallelism</b> (annotate I/O placement, compiler emits collectives), <b>compile-time KV-cache state management</b> (a C++ finite-state machine treating resource ownership as verifiable contracts), pluggable heterogeneous-accelerator kernels, and <b>agentic-optimized Multi-head Latent Attention</b> kernels that ~halve decode latency — beating NVIDIA's TensorRT-LLM by ~9% latency (batch 1) and ~11% throughput at agentic concurrency.</p>
+
+      <div class="update">
+        <div class="lbl">Model update</div>
+        <ul>
+          <li>Adds a "where value accrues" layer to your serving model (<a href="mental-models.html#serving" style="color:var(--accent)">§5</a>): as base models commoditize, the <b>moat moves to the inference runtime + kernels + workload-specific optimization</b> (agentic vs chat vs batch). Generic serving frameworks are not where the edge is.</li>
+          <li><b>Agentic workloads are their own regime</b> — long context + many turns + tight latency stress the stack differently than chat, which is why agentic-specific engines exist. Relevant if your systems run tool-loop/agentic inference.</li>
+          <li>Reinforces the efficiency &amp; specialization frontier: compiler-backed parallelism and compile-time KV management echo the YC "AI-generated kernels lower the barrier" and NVIDIA CMX "KV as a managed resource" threads — the "who can optimize" + "specialize" axes, productized.</li>
+          <li>Note the <b>MLA (Multi-head Latent Attention)</b> as the agentic-decode workhorse — the DeepSeek-lineage attention now showing up in third-party engines.</li>
+        </ul>
+      </div>
+
+      <p class="watch"><b>Note:</b> vendor thesis (LightSeek is promoting its own engine); grounded in their TokenSpeed writeup since the Pulse post wouldn't load. <b>Watch:</b> independent verification of the ~9–11% vs TensorRT-LLM claims · specialized runtimes vs vLLM/SGLang generalists · whether "value in the runtime" holds or hyperscalers absorb it · breadth of MLA adoption.</p>
+
+      <div class="tags">
+        <span class="tag">LLM inference</span>
+        <span class="tag">Serving runtimes</span>
+        <span class="tag">Agentic workloads</span>
+        <span class="tag">KV cache</span>
+        <span class="tag">Kernels / compilers</span>
+        <span class="tag">Value migration</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="kicker">
+        <span>Project page · arXiv 2602.15922</span><span class="dot"></span><span>2026</span><span class="dot"></span><span>NVIDIA et al.</span><span class="sig sig-struct">Structural shift</span>
+      </div>
+      <h2><a href="https://dreamzero0.github.io" target="_blank" rel="noopener">DreamZero: World-Action Models are Zero-shot Policies</a></h2>
+      <p class="summary">NVIDIA-led work attacking VLAs' core weakness — great at <em>semantics</em>, poor at generalizing to <em>unseen physical motions</em>. DreamZero is a <b>World-Action Model (WAM)</b> on a <b>14B autoregressive video-diffusion backbone</b> pretrained on heterogeneous robot data that <b>jointly predicts future world state (as video) and actions</b> — learning physical dynamics, not just semantic mappings. Results: on <b>AgiBot</b>, 62.2% avg task progress on seen tasks (<b>2.2× the VLA baseline's 27.4%</b>) and <b>39.5% on entirely unseen tasks</b>; on <b>DROID</b>, 49% on unseen verbs vs 25-32% for comparable VLAs; <b>cross-embodiment</b> adaptation to a new robot with just <b>30 min of play data</b> while keeping zero-shot generalization; a <b>38× inference speedup → 7Hz real-time closed-loop control</b> (150ms/action chunk); 100+ zero-shot tasks in novel environments with unseen objects.</p>
+
+      <div class="update">
+        <div class="lbl">Model update</div>
+        <ul>
+          <li>Concrete evidence for the WAM thesis: jointly modeling <b>video (world dynamics) + action beats semantic-only VLAs</b> on physical generalization — "pretrained to imagine, fine-tuned to act," now with numbers. Update the VLA model (<a href="mental-models.html#vla" style="color:var(--accent)">§2</a>): the frontier policy is <b>a world model with an action head</b>, not a VLM with an action head.</li>
+          <li>The <b>38× speedup to 7Hz real-time</b> is the underrated systems result — video-diffusion policies were too slow for closed-loop control; making them real-time is what makes the approach <em>deployable</em> (efficiency-frontier flavored).</li>
+          <li><b>Cross-embodiment on 30 min of play data</b> speaks to the data-bottleneck story (Jaipuria): a strong world-action prior amortizes per-robot data — the moat is the pretrained WAM + light adaptation.</li>
+          <li>AV read-across: the same "predict-the-world-and-act" recipe is what Alpamayo-style reasoning-driving reaches for — DreamZero is the general-robotics proof point.</li>
+        </ul>
+      </div>
+
+      <p class="watch"><b>Watch:</b> independent reproduction of the 2.2× / zero-shot numbers · whether a 14B video-diffusion prior scales to AV-scale scenes · the real-time speedup holding at higher control rates · head-to-head vs. physics-sim-trained policies (ties to the simulation-stack entry below).</p>
+
+      <div class="tags">
+        <span class="tag">World-Action Models (WAM)</span>
+        <span class="tag">VLA</span>
+        <span class="tag">Robot foundation models</span>
+        <span class="tag">Video diffusion</span>
+        <span class="tag">Zero-shot generalization</span>
+        <span class="tag">Real-time control</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="kicker">
+        <span>Substack · Tanay Jaipuria</span><span class="dot"></span><span>Aug 3, 2026</span><span class="dot"></span><span>framework / explainer</span><span class="sig sig-struct">Structural shift</span>
+      </div>
+      <h2><a href="https://www.tanayj.com/p/the-simulation-stack-in-robotics" target="_blank" rel="noopener">The Simulation Stack in Robotics</a></h2>
+      <p class="summary">Jaipuria frames simulation as the answer to robotics' <b>data bottleneck</b> — "scaling data based on compute" — and splits the field into <b>two complementary camps</b>. <b>Physics-based sim</b> (MuJoCo, NVIDIA Isaac Sim/Lab, Genesis, Newton): perfect ground truth, GPU-parallel ("years of experience in hours"), proven on locomotion &amp; dexterity (OpenAI's Rubik's-cube hand), but weak on deformables, liquids, suction. <b>World models</b> (neural, video-trained, predict next state given action; World Labs, General Intuition, OneWorld, DeepMind Genie 3, NVIDIA Cosmos): today used mostly for <b>policy eval &amp; data augmentation</b>, not primary training. The stack layers: <b>physics engines → sim-ready assets/environments (Lightwheel) → sim-infra platforms (Antioch, Drift) → world models → eval/testing</b>. The sim-to-real gap cuts both ways — physics lacks content realism; world models hallucinate &amp; drift on physics — bridged by domain randomization and <b>real-to-sim reconstruction</b> (World Labs). Emerging recipe: internet video + egocentric data + real demos, then <b>sim RL for policy hardening</b> and <b>synthetic data for eval</b> (Genesis/Skild/NVIDIA are sim-heavy; 1X uses world models for eval).</p>
+
+      <div class="update">
+        <div class="lbl">Model update</div>
+        <ul>
+          <li>Clean taxonomy for your sim-infra mental model: <b>physics sim and world-model sim are complementary, not competing</b> — physics for ground-truth, contact-rich RL; world models for perceptual realism, eval, and augmentation. Map each to its job rather than pick a winner.</li>
+          <li>The durable recipe: sim = <b>data-scaling-by-compute + policy hardening (RL in sim) + eval (synthetic/world-model)</b>, layered <em>on top of</em> real data (video/egocentric/demos) — not sim-only.</li>
+          <li>Direct AV read-across: this is the general-robotics version of your Alpamayo / scenario-gen stack (<a href="mental-models.html#av" style="color:var(--accent)">§7</a>) — the assets + infra + world-model + eval layering and the real-to-sim bridge are the same problems you face.</li>
+          <li>Grounds the world-models debate (<a href="mental-models.html#world-models" style="color:var(--accent)">§1</a>): here world models <em>are</em> simulators, and their hallucination/physics-drift is exactly why physics sim isn't going away — "look real vs. be physically correct," made operational.</li>
+        </ul>
+      </div>
+
+      <p class="watch"><b>Watch:</b> whether world-model sims graduate from eval/augmentation to <em>primary training</em> · who wins the sim-infra platform layer (Antioch / Drift) · the sim-ready-asset authoring bottleneck (Lightwheel) as a real constraint. <b>Home-page candidate:</b> durable enough to become its own "Simulation stack" model on the companion page — say the word.</p>
+
+      <div class="tags">
+        <span class="tag">Simulation</span>
+        <span class="tag">Robotics data / sim-to-real</span>
+        <span class="tag">World models</span>
+        <span class="tag">Physics engines</span>
+        <span class="tag">Sim infrastructure</span>
+        <span class="tag">RL in sim</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="kicker">
+        <span>YC Paper Club (video)</span><span class="dot"></span><span>Jul 15, 2026</span><span class="dot"></span><span>recap shared via LinkedIn</span><span class="sig sig-struct">Structural shift</span>
+      </div>
+      <h2><a href="https://www.youtube.com/watch?v=n8dz2FX0_uY" target="_blank" rel="noopener">Placement, not scale: heterogeneous inference, intelligence-per-watt &amp; the edge</a></h2>
+      <p class="summary">A YC Paper Club recap arguing the real AI-infra shift isn't bigger clusters but <b>where</b> compute happens, <b>which</b> hardware runs each stage, and <b>who</b> can optimize the stack. Three insights: <b>(1) Orbital training economics</b> — space data centers reframe the bottleneck from chip supply to energy/cooling/land (long-duration solar, offline training), trading grid limits for latency/launch/maintenance/reliability. <b>(2) Heterogeneous chip allocation</b> — heterogeneous inference assigns different model <em>phases</em> to different hardware, extending older chips' useful life, cutting cost/query, and making inference modular; procurement shifts from buying peak hardware to <b>orchestrating mixed fleets</b>. <b>(3) Edge-side access</b> — if ~88% of AI queries can run locally, inference stops being a pure cloud story (less cloud dependency, better latency, different margins), and <b>AI-generated GPU kernels lower the optimization barrier</b> so more teams hit high performance without scarce kernel experts (e.g. Stuart Sul's ParallelKittens beating hand-tuned multi-GPU kernels in ~50 LoC, already used by Cursor / Together). Strategic signal: not one breakthrough but a <b>redistribution of constraints</b> — energy, memory, hardware specialization, developer expertise are all now design variables. "AI infrastructure strategy starts with <b>placement, not just scale</b>."</p>
+
+      <div class="update">
+        <div class="lbl">Model update</div>
+        <ul>
+          <li>Crystallizes the efficiency &amp; specialization frontier into a thesis — <b>"placement, not scale."</b> Three new design axes beyond raw FLOPs: <em>where</em> (edge/cloud/orbit), <em>which hardware per phase</em> (heterogeneous inference), and <em>who can optimize</em> (AI-generated kernels).</li>
+          <li>Most actionable for you: <b>heterogeneous inference</b> — map phases (prefill/decode &amp; beyond) to different accelerators, extending older-chip life and cutting cost/query. It's a fleet-<b>orchestration</b> problem; complements PD-disaggregation (<a href="mental-models.html#serving" style="color:var(--accent)">§5</a>) and NVIDIA CMX KV-tiering.</li>
+          <li><b>AI-generated GPU code</b> partially automates kernel expertise — a scarce skill in your world — and quietly ties into the <em>AI-as-autonomous-researcher</em> trend (automating ML/eng work). Watch ParallelKittens-style tooling.</li>
+          <li>Edge at ~88% local reframes latency/margins for AV/on-device — consistent with Muse Glimmer and Dean's "inference is the product." Orbital DCs = speculative long-horizon; file as a tail idea.</li>
+        </ul>
+      </div>
+
+      <p class="watch"><b>Note:</b> full text captured from your screenshot; source is the YC Paper Club episode (Stuart Sul et al.). <b>Watch:</b> real adoption of heterogeneous-inference orchestration · how good AI-generated kernels get vs. experts · provenance of the "88% local" figure · whether orbital compute is ever more than a thought experiment.</p>
+
+      <div class="tags">
+        <span class="tag">AI infrastructure</span>
+        <span class="tag">Heterogeneous inference</span>
+        <span class="tag">Edge AI</span>
+        <span class="tag">Intelligence per watt</span>
+        <span class="tag">GPU kernels / optimization</span>
+        <span class="tag">Placement &gt; scale</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="kicker">
+        <span>LinkedIn Pulse · Ali Ahmadalipour (Google X)</span><span class="dot"></span><span>Aug 2026</span><span class="dot"></span><span>survey / landscape</span><span class="sig sig-emerg">Emerging direction</span>
+      </div>
+      <h2><a href="https://www.linkedin.com/pulse/rise-autonomous-ai-labs-scientists-rd-ali-ahmadalipour-hco2c" target="_blank" rel="noopener">The Rise of Autonomous AI Labs: AI Scientists in R&amp;D</a></h2>
+      <p class="summary">A Google X research scientist maps the fast-emerging landscape of <b>autonomous AI labs / AI scientists</b> — systems that run the scientific loop (hypothesize → experiment → analyze → iterate) with minimal human intervention. Two converging strands: <b>(1) physical self-driving labs</b> in chemistry, materials, and biology (Argonne's autonomous discovery, Nature's multi-agent materials labs, a Northeastern "AI scientist" that autonomously ran X-ray experiments), and <b>(2) autonomous AI-research labs</b> that automate ML/R&amp;D itself (Autoscience; Jeff Dean's Discovery Loop). Recurring theme: as execution automates, the scarce human role shifts to <b>"taste"</b> — deciding which problems and hypotheses are worth pursuing. Still gated by genuine <b>idea-generation</b> and reliable closed-loop autonomy.</p>
+
+      <div class="update">
+        <div class="lbl">Model update</div>
+        <ul>
+          <li>This is the <b>independent corroboration</b> the "AI as autonomous researcher" trend needed — it's a whole <em>field</em> (self-driving labs across chem/materials/bio + autonomous ML-research labs), not just Discovery Loop. Trend upgraded from Dean-adjacent early signal → <b>strengthening</b>.</li>
+          <li>Durable decomposition: the scientific loop = propose → execute → evaluate → iterate; <b>execute/evaluate/iterate are automatable now</b>, <b>propose (novel hypotheses) is the frontier</b>, and human value migrates to <b>taste + building the loops</b>.</li>
+          <li>For you, two flavors matter: <b>automating ML research</b> (ablations, arch/data search — adjacent to your day job) and <b>physical self-driving labs</b> (closer to robotics/embodied). Watch which loop components get productized first.</li>
+          <li>Generalizes the Faire "Autoscience" cross-link already noted in <a href="mental-models.html#frontier" style="color:var(--accent)">mental-models §8</a>.</li>
+        </ul>
+      </div>
+
+      <p class="watch"><b>Note:</b> a landscape survey (opinion/synthesis) — grounded in the broader field since the Pulse post wouldn't load. <b>Watch:</b> proof of genuinely <em>novel</em> (not incremental) discoveries · how much stays human-in-the-loop · standardized benchmarks for "autonomous discovery."</p>
+
+      <div class="tags">
+        <span class="tag">AI for science</span>
+        <span class="tag">Autonomous / self-driving labs</span>
+        <span class="tag">AI scientist</span>
+        <span class="tag">Research automation</span>
+        <span class="tag">Recursive self-improvement</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="kicker">
+        <span>NVIDIA (dev blog)</span><span class="dot"></span><span>Aug 2026</span><span class="dot"></span><span>via Manav Sutar (LinkedIn)</span><span class="sig sig-struct">Structural shift</span>
+      </div>
+      <h2><a href="https://developer.nvidia.com/blog/introducing-nvidia-bluefield-4-powered-inference-context-memory-storage-platform-for-the-next-frontier-of-ai/" target="_blank" rel="noopener">NVIDIA: the KV cache doesn't have to live in GPU memory</a></h2>
+      <p class="summary">NVIDIA's <b>CMX (Context Memory Storage) platform</b>, powered by <b>BlueField-4</b>, disaggregates the KV cache out of HBM into a new <b>"G3.5" tier</b> — an Ethernet-attached flash layer between GPU memory and storage that turns the KV cache into a <b>shared, high-bandwidth, pod-level long-term memory resource</b>. The enabling insight: KV cache is <b>"transient, derived, and recomputable,"</b> so it's an AI-native data class that doesn't need durable-storage overhead. BlueField-4 DPUs offload the KV I/O (NVMe-oF, RDMA, line-rate encryption) so host CPUs aren't in the path, cutting serialization and memory copies. NVIDIA claims <b>~5× higher tokens/sec</b> on long-context workloads and <b>~5× better power efficiency</b> vs. general-purpose storage, by prestaging KV so decoders don't stall on GPU-memory scarcity. It's part of a broader movement (vLLM's KV-offloading connector, NVMe offload, Dynamo's KV block manager).</p>
+
+      <div class="update">
+        <div class="lbl">Model update</div>
+        <ul>
+          <li>Update the serving model (<a href="mental-models.html#serving" style="color:var(--accent)">§5</a>): the KV cache is going from a <b>per-GPU memory tax → a tiered, offloadable, <em>shared</em> resource.</b> Long context and big batches stop being gated purely by HBM capacity.</li>
+          <li>The load-bearing reframing is "<b>KV is derived &amp; recomputable</b>" — which legitimizes <b>recompute-vs-store</b> tradeoffs and <b>cross-request / prefix-KV reuse</b> at pod scale, not just within one request.</li>
+          <li>Ties to Jeff Dean's ~1000× data-movement energy point and your <a href="mental-models.html#hardware" style="color:var(--accent)">hardware model</a>: CMX attacks memory <em>capacity/tiering</em> while BlueField-4 attacks the <em>movement/CPU overhead</em>. Complements (doesn't replace) KV <em>compression</em> like NVFP4 — you can compress <em>and</em> offload.</li>
+          <li>For your stack: prefix-KV reuse + offload could help long-context AV/foundation-model inference and RL rollouts — but it's an <b>NVIDIA-stack play</b> (BlueField-4, Dynamo). Watch lock-in vs. open parity (vLLM connector).</li>
+        </ul>
+      </div>
+
+      <p class="watch"><b>Note:</b> vendor announcement — the 5× figures are NVIDIA's. Entry grounded in NVIDIA's own writeup (LinkedIn post wouldn't load); paste Manav's text for a Via note. <b>Watch:</b> independent benchmarks vs the 5× claims · whether offload latency stays under decode SLAs · open-stack parity · compress-and-offload combos (NVFP4 KV + CMX).</p>
+
+      <div class="tags">
+        <span class="tag">KV cache</span>
+        <span class="tag">Inference efficiency</span>
+        <span class="tag">Memory hierarchy / offload</span>
+        <span class="tag">Long context</span>
+        <span class="tag">NVIDIA (BlueField / CMX)</span>
+        <span class="tag">Serving systems</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="kicker">
+        <span>LinkedIn · Jason Shuman (Primary VC)</span><span class="dot"></span><span>Aug 2026</span><span class="dot"></span><span>thesis / commentary</span><span class="sig sig-emerg">Emerging direction</span>
+      </div>
+      <h2><a href="https://www.linkedin.com/posts/jasonshuman_robotics-wont-scale-like-ai-ai-can-distribute-share-7492926782220980224-2NGn/" target="_blank" rel="noopener">Robotics won't scale like AI</a></h2>
+      <p class="summary">Shuman's thesis: <b>AI scales through near-zero-marginal-cost software distribution</b> — ship weights or an API and it's everywhere overnight. <b>Robotics can't</b>: it's bottlenecked by <em>atoms</em> — hardware manufacturing, per-site physical deployment, integration, and service — so it scales like <b>industrials, not software</b>. The corollary he's drawn elsewhere: one of the first scaled "Physical AI" companies may be built through <b>M&amp;A / roll-up + vertical integration</b> rather than around a single robot (he points to Agile Robots — reportedly ~€300M 2025 revenue, ~2× expected in 2026, a dozen-plus acquisitions). So robotics' capital structure, go-to-market, moats, and timelines differ fundamentally from software AI, even where the <em>capability</em> curves (VLA, world models) converge.</p>
+
+      <div class="update">
+        <div class="lbl">Model update</div>
+        <ul>
+          <li>Separate the <b>capability curve from the distribution curve</b>: robotics can match AI on capability yet still scale slowly because distribution is physical. For AV, this is the "deployment gap" made <b>economic</b> — atoms, not models, gate rollout.</li>
+          <li>Expect the winning motion to be <b>roll-up / vertical integration</b> (own the stack, deploy site-by-site), not API-style fan-out — which shifts who wins toward <b>integrators/operators</b> and implies industrial, not SaaS, margins.</li>
+          <li>Reframes "physical AI" moats: manufacturing, deployment &amp; service networks, and a <b>per-deployment data flywheel</b> — not model quality alone.</li>
+          <li>Complements the tech story in your <a href="mental-models.html#vla" style="color:var(--accent)">VLA / robotics model</a> and the a16z "physical AI deployment gap": convergence of the <em>models</em> doesn't imply the <em>business</em> scales like software.</li>
+        </ul>
+      </div>
+
+      <p class="watch"><b>Note:</b> a VC thesis (opinion, not a result) — reconstructed from the post's framing + Shuman's related writing since LinkedIn wouldn't load; paste his exact text and I'll tighten to his words. <b>Watch:</b> does M&amp;A/roll-up actually produce the first scaled physical-AI company (Agile Robots as the test case) · does any robotics niche find a software-like distribution wedge (sim, teleop marketplaces, fleet software).</p>
+
+      <div class="tags">
+        <span class="tag">Physical AI</span>
+        <span class="tag">Robotics economics</span>
+        <span class="tag">Scaling / distribution</span>
+        <span class="tag">Vertical integration / M&amp;A</span>
+        <span class="tag">Deployment gap</span>
+      </div>
+    </article>
 
     <article class="entry">
       <div class="kicker">
@@ -421,7 +859,7 @@
   </section>
 
   <footer>
-    <p style="margin:0 0 10px;color:var(--ink);font-weight:600">Reading Thread · v1.2 · updated Aug 11, 2026 · 9 readings + companion <a href="mental-models.html" style="color:var(--accent)">Ongoing Mental Models</a> page — full change history in the repo's commit log.</p>
+    <p style="margin:0 0 10px;color:var(--ink);font-weight:600">Reading Thread · v1.17 · updated Aug 13, 2026 · 24 readings + companion <a href="mental-models.html" style="color:var(--accent)">Ongoing Mental Models</a> page — full change history in the repo's commit log.</p>
     How this works: send me any link (article, paper, thread). I add a dated entry with a tight summary, a <b>Model update</b> block — what it should change or confirm in how you think — and domain tags. As tags and updates accumulate, recurring patterns get promoted into <b>Meta-trends forming</b> above, with a confidence note. Ask anytime for a "trends only" view or to filter by tag.
   </footer>
 
